@@ -78,22 +78,35 @@
       border: none;
       border-radius: 4px;
     }
+
+    /* 新增样式，用于显示错误信息 */
+    .error {
+      color: #dc3545; /* 错误信息的颜色 */
+      display: block;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      font-size: 14px; /* 修改字体大小 */
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
     <div class="form-container">
-      <form method="post">
+      <form method="post" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+          <label>{{ field.label }}</label>
+          {{ field }}
+          <span class="error">{{ field.errors.0 }}</span>
+        {% endfor %}
         <div class="btn-container">
           <button type="submit" name="login_type" value="doctor_login" class="btn btn-primary">医生登录</button>
           <button type="submit" name="login_type" value="patient_login" class="btn btn-success">患者登录</button>
         </div>
       </form>
       <div class="form-group">
-        <a href="" class="btn-register">患者注册</a>
+        <a href="/enroll/" class="btn-register">患者注册</a>
       </div>
     </div>
   </div>

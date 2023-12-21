@@ -17,16 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from hospital import views
+from hospital.views import patient, doctor, login
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("home/", views.home),
-    path("login/", views.login),
-    path("enroll/", views.enroll),
-    path("register/", views.register),
-    path("register/appoint/<int:doctor_id>/", views.register_appoint),
-    path("register/appoint_/", views.register_appoint_test),
-    path('patient_personal/', views.patient_personal, name='patient_personal'),
-    path('patient_personal/<int:registration_id>', views.patient_personal, name='cancel_registration'),
+    path("login/", login.login),
+    path("enroll/", login.enroll),
+    
+    path("patient/home/", patient.home),
+    path("patient/register/", patient.register),
+    path("patient/register/appoint/<int:doctor_id>/", patient.register_appoint),
+    path("patient/register/success/", patient.register_sucess),
+    path("patient/register/appoint/", patient.register_appoint_test),
+    path("patient/records", patient.records),
+    path("patient/cancel_registration/<int:registration_id>", patient.cancel_registration),
+    path("mytest/", patient.mytest),
 ]

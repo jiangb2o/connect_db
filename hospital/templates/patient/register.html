@@ -12,7 +12,7 @@
   <h1>医生列表</h1>
 
   <!-- 搜索栏 -->
-  <form method="get" action="/register/">
+  <form method="get" action="/patient/register/">
     <label for="name">医生姓名：</label>
     <input type="text" id="name" name="name" value="{{ name_query }}">
     <label for="department">科室：</label>
@@ -34,7 +34,7 @@
       <tr>
         <td>{{ doctor.name }}</td>
         <td>{{ doctor.dept.name }}</td>
-        <td><a href="/register/appoint/{{ doctor.id }}/">预约</a></td>
+        <td><a href="/patient/register/appoint/{{ doctor.id }}/">预约</a></td>
       </tr>
       {% endfor %}
     </tbody>

@@ -28,11 +28,11 @@
       <tr>
         <td>{{ registration.doctor.name }}</td>
         <td>{{ registration.resgitration_time }}</td>
-        <td>{{ registration.peirod }}</td>
+        <td>{{ registration.period }}</td>
         <td>{{ registration.status }}</td>
         {% if registration.status == 'registered' %}
-        <td><a href="{% url 'cancel_registration' registration.id %}">取消预约</a></td>
-        {%endif%}
+        <td><a href="{/patient/cancel_registration/ {{registration.id}}}">取消预约</a></td>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>

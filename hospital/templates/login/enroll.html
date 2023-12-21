@@ -17,6 +17,7 @@
         }
     
         form {
+            width: 400px;  /* Increase the width of the entire form */
             background-color: #fff;
             padding: 30px;  /* Increase padding for the entire form */
             border-radius: 8px;
@@ -34,19 +35,10 @@
             color: #555;
         }
     
-        select {
-        width: 90%;  /* 设置所有输入框和选择框的宽度为100% */
-        padding: 10px;
-        margin-bottom: 16px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        }
-
+        select,
         input {
-            width: calc(100% - 20px);  /* Adjust width of input to accommodate padding */
+            width: 90%;
             padding: 10px;
-            margin-bottom: 20px;  /* Increase margin between input fields */
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -62,29 +54,28 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        /* 添加样式以调整错误信息的字体大小和颜色 */
+        span.error {
+            font-size: 12px;
+            color: #ff0000;  /* 或者其他你想要的颜色 */
+            display: block; /* 以块级元素显示，使得高度不受其他元素影响 */
+            margin-top: 4px; /* 添加上边距，使得与其他元素分离 */
+            margin-bottom: 8px; 
+        }
     </style>
 </head>
 <body>
 
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     <h2>Patient Registration</h2>
 
-    <label for="id_name">Name:</label>
-    {{ form.name }}
-
-    <label for="id_username">Username:</label>
-    {{ form.username }}
-
-    <label for="id_password">Password:</label>
-    {{ form.password }}
-
-    <label for="id_age">Age:</label>
-    {{ form.age }}
-
-    <label for="id_gender">Gender:</label>
-    {{ form.gender }}
-
+    {% for field in form %}
+        <label>{{field.label}}</label>
+        {{field}}
+        <span class="error">{{field.errors.0}}</span>
+    {% endfor %}
     <input type="submit" value="Register">
 </form>
 

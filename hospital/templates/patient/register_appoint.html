@@ -1,5 +1,4 @@
 {% load static %}
-<!-- doctors_list.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +8,8 @@
 </head>
 <body>
 
-  <h1>医生列表</h1>
+  <h1>选择预约时间</h1>
 
-  <!-- 搜索栏 -->
   <form method="post">
     <!-- 使用HTML5日期选择器 -->
     <label for="appointment_time">选择日期：</label>
@@ -23,7 +21,7 @@
     <select id="period" name="period">
       {% for k,v in options %}
       <option value="{{k}}">{{v}}</option>
-      {%endfor%}
+      {% endfor %}
     </select>
 
     <button type="submit">提交预约</button>
