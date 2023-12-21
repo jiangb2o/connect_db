@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .form-container {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      margin-top: 15px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      width: 48%;
+      padding: 10px;
+      box-sizing: border-box;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .btn-register {
+      text-decoration: none; /* 去除下划线 */
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      cursor: pointer;
+      background-color: #17a2b8;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-container">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="btn-container">
+          <button type="submit" name="login_type" value="doctor_login" class="btn btn-primary">医生登录</button>
+          <button type="submit" name="login_type" value="patient_login" class="btn btn-success">患者登录</button>
+        </div>
+      </form>
+      <div class="form-group">
+        <a href="" class="btn-register">患者注册</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

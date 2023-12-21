@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>医生列表</title>
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+
+  <h1>医生列表</h1>
+
+  <!-- 搜索栏 -->
+  <form method="get" action="/register/">
+    <label for="name">医生姓名：</label>
+    <input type="text" id="name" name="name" value="{{ name_query }}">
+    <label for="department">科室：</label>
+    <input type="text" id="department" name="department" value="{{ dept_query }}">
+    <button type="submit">搜索</button>
+  </form>
+
+  <!-- 医生列表表格 -->
+  <table>
+    <thead>
+      <tr>
+        <th>医生姓名</th>
+        <th>科室</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for doctor in doctors_data %}
+      <tr>
+        <td>{{ doctor.name }}</td>
+        <td>{{ doctor.dept.name }}</td>
+        <td><a href="/register/appoint/{{ doctor.id }}/">预约</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>
