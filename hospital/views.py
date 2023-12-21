@@ -180,3 +180,6 @@ def cancel_registration(request, registration_id):
         registration.save()
     
     return redirect('patient_personal')
+
+def main():
+    pass
