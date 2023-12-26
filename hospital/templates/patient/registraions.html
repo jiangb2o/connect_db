@@ -32,13 +32,13 @@
       {% for registration in registrations %}
       <tr>
         <td>{{ registration.doctor.name }}</td>
-        <td>{{ registration.registration_time }}</td>
-        <td>{{ registration.period }}</td>
-        <td>{{ registration.status }}</td>
-        {% if registration.status == 'registered' %}
+        <td>{{ registration.registration_time|date:"Y年 m月 d日" }}</td>
+        <td>{{ registration.get_period_display }}</td>
+        <td>{{ registration.get_status_display }}</td>
+        {% if registration.status == 0 %}
         <td><a href="/patient/cancel_registration/{{ registration.id }}" style=" text-decoration: underline;">取消预约</a></td>
         {% endif %}
-        {% if registration.status == 'cancelled' %}
+        {% if registration.status == 1 %}
         <td>预约已取消</td>
         {% endif %}
       </tr>

@@ -22,7 +22,10 @@ def register(request):
         doctors = doctors.filter(dept=dept_query)
 
     # doctors = [] # 运行时注释此行
-    return render(request, 'patient/register.html', {'doctors': doctors, 'name_query': name_query, 'dept_query': dept_query, 'departments' : departments})
+    # 转换为int 在前端进行比较
+    dept_query = int(dept_query, base=10) if dept_query != '' else 0
+    
+    return render(request, 'patient/register.html', {'doctors': doctors, 'name_query': name_query, 'dept_query': (dept_query), 'departments' : departments})
     
 def register_sucess(request):
     return render(request, 'patient/register_success.html')
@@ -46,7 +49,7 @@ def register_appoint(request, doctor_id):
             patient=patient,
             registration_time=appointment_datetime,
             period=period,
-            status='registered',
+            status=0,
         )
 
         return redirect('/patient/register/success/')
@@ -65,8 +68,8 @@ def registrations(request):
 
 def cancel_registration(request, registration_id):
     registration = get_object_or_404(Registration, pk=registration_id)
-    if registration.status == 'registered':
-        registration.status = 'cancelled'
+    if registration.status == 0:
+        registration.status = 1
         registration.save()
     
     return redirect('/patient/registrations/')

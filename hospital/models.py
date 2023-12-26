@@ -35,11 +35,17 @@ class Registration(models.Model):
     #     verbose_name = '挂号记录'
     #     verbose_name_plural = '挂号记录'
 
+    #STATUS_CHOICES = [
+    #    ('Registered', '已挂号'),
+    #    ('Cancelled', '已取消'),
+    #    ('Processing', '就诊中'),
+    #    ('Finished', '就诊结束'),
+    #]
     STATUS_CHOICES = [
-        ('Registered', '已挂号'),
-        ('Cancelled', '已取消'),
-        ('Processing', '就诊中'),
-        ('Finished', '就诊结束'),
+        (0, '已挂号'),
+        (1, '已取消'),
+        (2, '就诊中'),
+        (3, '就诊结束'),
     ]
 
     PERIOD_CHOICES = [
@@ -53,7 +59,7 @@ class Registration(models.Model):
     patient = models.ForeignKey(Patient, verbose_name='患者', on_delete=models.CASCADE, related_name='appointments')
     registration_time = models.DateTimeField(verbose_name='挂号时间')
     period = models.SmallIntegerField(verbose_name='挂号时段', choices=PERIOD_CHOICES)
-    status = models.CharField(verbose_name='状态', max_length=10, choices=STATUS_CHOICES)
+    status = models.SmallIntegerField(verbose_name='状态', max_length=10, choices=STATUS_CHOICES)
 
 class MedicalRecord(models.Model):
     '''病历'''
