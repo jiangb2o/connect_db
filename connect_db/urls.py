@@ -29,7 +29,15 @@ urlpatterns = [
     path("patient/register/appoint/<int:doctor_id>/", patient.register_appoint),
     path("patient/register/success/", patient.register_sucess),
     path("patient/register/appoint/", patient.register_appoint_test),
-    path("patient/records", patient.records),
-    path("patient/cancel_registration/<int:registration_id>", patient.cancel_registration),
+    path("patient/registrations/", patient.registrations),
+    path("patient/cancel_registration/<int:registration_id>/", patient.cancel_registration),
+    path("patient/personnel/", patient.personnel),
+    path("patient/profile/<int:doctor_id>/", patient.cancel_registration),
+    path('patient/medical_record/', patient.medical_record),
+    path('patient/personal/', patient.personal),
     path("mytest/", patient.mytest),
+
+    path('doctor/home/', doctor.home),
+    path('doctor/registrations/', doctor.registrations),
+    path('doctor/medical_record/', doctor.medical_record),
 ]

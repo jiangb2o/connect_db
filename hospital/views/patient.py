@@ -56,10 +56,11 @@ def register_appoint(request, doctor_id):
 def register_appoint_test(request):
     return render(request, 'patient/register_appoint.html')
 
-def records(request):
-    userid = request.session['info']['id']
-    registrations = Registration.objects.filter(patient=userid)
-    return render(request, 'patient/records.html', {'registrations':registrations})
+def registrations(request):
+    patient_id = request.session.get('info')['id']
+    patient = Patient.objects.get(id=patient_id)
+    registrations = Registration.objects.filter(patient=patient)
+    return render(request, 'patient/registraions.html', {'registrations':registrations})
 
 def cancel_registration(request, registration_id):
     registration = get_object_or_404(Registration, pk=registration_id)
@@ -69,10 +70,23 @@ def cancel_registration(request, registration_id):
     
     return redirect('/patient/records/')
 
+def personnel(request):
+    doctors = Doctor.objects.all()
+    return render('patient/personnel.html', {'doctors': doctors})
+
+def profile(request, doctor_id):
+    return render('patient/profile.html', {'doctor_id': doctor_id})
+
+def medical_record(request, registration_id):
+    return render('patient/medical_record.html', {'registration_id': registration_id})
+
+def personal(request):
+    return render('patient/personal.html')
+
 def mytest(request):
-    # contact_list = Contact.objects.all()
+    # patient_list = Patient.objects.all()
     mylist = [1,2,3,4,5,6,7,8,9,10]
-    paginator = Paginator(mylist, 2) # Show 25 contacts per page.
+    paginator = Paginator(mylist, 2)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

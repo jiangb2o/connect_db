@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医生登录 - 患者预约记录</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/Registration.css">
+</head>
+
+<body>
+    <header> <h5>医生界面</h5> 
+        <ul class="navigation">                                
+          <li><a  >Home</a></li>
+          <li><a >Login</a></li>
+          <li><a class="active">Registration</a></li>
+          <li><a >Personal</a></li>
+        </ul>
+      </header>
+    <!-- 菜单栏和页面内容容器 -->
+    <div class="menu-container">
+        <!-- 菜单栏 -->
+        <div class="sidenav"> 
+            <a href="#">首页</a>
+            <a href="#" class="active">患者预约记录</a>         
+        </div>
+
+    <div class="container">
+        <h2>患者预约记录</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">患者姓名</th>
+                    <th scope="col">预约时间</th>
+                    <th scope="col">预约时段</th> 
+                    <th scope="col">状态</th> 
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 示例数据 -->
+                <tr>
+                    <td>{{% registration.patient.name %}}</td>
+                    <td>{{% registration.registration_time %}}</td>
+                    <td>{{% registration.period %}}</td>
+                    <td>{{% registration.status %}}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-able" onclick="acceptAppointment(this)">接诊</button>
+                            <button class="btn btn-disable" onclick="fillCase(this)" disabled>填写病例</button>
+                            <button class="btn btn-disable" onclick="endVisit(this)" disabled>结束就诊</button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- 更多患者记录... -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function acceptAppointment(btn) {
+            // 模拟接诊操作
+            alert('接诊成功！');
+            // 禁用接诊按钮，启用填写病例按钮
+            btn.disabled = true;
+            btn.nextElementSibling.disabled = false;
+            btn.nextElementSibling.nextElementSibling.disabled = false;
+            // 设置接诊按钮的颜色
+            btn.classList.remove('btn-accept'); // 移除原有颜色类
+            btn.classList.add('btn-disable'); // 添加新的颜色类
+            btn.nextElementSibling.classList.remove('btn-disable');
+            btn.nextElementSibling.classList.add('btn-able');
+        }
+
+        function fillCase(btn) {
+            // 模拟填写病例操作
+            alert('填写病例成功！');
+            // 启用结束就诊按钮，禁用填写病例按钮
+            btn.previousElementSibling.disabled = true;//btn1
+            btn.disabled = true;//btn2
+            btn.nextElementSibling.disabled = false;//btn3
+            btn.classList.remove('btn-accept'); // 移除原有颜色类
+            btn.classList.add('btn-disable'); // 添加新的颜色类
+            btn.nextElementSibling.classList.remove('btn-disable');
+            btn.nextElementSibling.classList.add('btn-able');
+        }
+
+        function endVisit(btn) {
+            // 模拟结束就诊操作
+            alert('就诊结束！');
+            // 禁用所有按钮
+            btn.disabled = true;
+            btn.classList.remove('btn-accept'); // 移除原有颜色类
+            btn.classList.add('btn-disable'); // 添加新的颜色类
+        }
+    </script>
+</body>
+
+</html>
+

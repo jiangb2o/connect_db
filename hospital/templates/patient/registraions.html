@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>挂号记录</title>
+  <link rel="stylesheet" href="../static/css/records.css"> 
+</head>
+
+<body>
+  <h1>挂号记录</h1>
+    <script>
+        // JavaScript 函数，用于返回上一页
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+  <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
+  <!-- 患者挂号记录表格 -->
+  <table>
+    <thead>
+      <tr>
+        <th>医生姓名</th>
+        <th>挂号时间</th>
+        <th>挂号时段</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for registration in registrations %}
+      <tr>
+        <td>{{ registration.doctor.name }}</td>
+        <td>{{ registration.resgitration_time }}</td>
+        <td>{{ registration.period }}</td>
+        <td>{{ registration.status }}</td>
+        {% if registration.status == 'registered' %}
+        <td><a href="{/patient/cancel_registration/ {{registration.id}}}" style=" text-decoration: underline;">取消预约</a></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</body>
+</html>

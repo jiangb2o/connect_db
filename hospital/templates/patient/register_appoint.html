@@ -1,31 +1,107 @@
 {% load static %}
+<!-- doctors_list.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>医生列表</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提交预约</title>
+  
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    
+    <style>
+      body {
+        background-color: #a5bdd4;
+        color: #343a40;
+        font-family: 'Arial', sans-serif;
+        padding: 20px;
+        
+      }
+  
+      h1 {
+        color: #112434;
+        text-align: center; /* 文字居中 */
 
-  <h1>选择预约时间</h1>
+      }
+      label {
+            margin-right: 10px;
+      }
+      form {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 700px; /* 调整max-width */
+        margin: auto; /* 水平居中 */
+        margin-top: 10vh; /* 垂直居中 */
+      }
+      .container {
+                position: relative;
+                min-height: 80vh;
+                background-color: #fff; /* 白色容器背景 */
+                border-radius: 8px; /* 圆角边框 */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+                flex-grow: 1;
+                margin-right: 20px; /* 将 margin-right 移动到这里 */
+                margin-top: 20px;
+      }
+     
+  
+      /* 示例按钮样式 */
+      .btn-primary {
+          background-color: #a5bdd4; /* 与网页背景颜色相同 */
+          border-color: #f8f9fa; /* 与网页背景颜色相同 */
+          margin: 0; /* 去除默认的body边距 */
+          margin-right: 20px;
+          color: #333;
+          text-decoration: underline;
+          margin-top: 20px;
+      }
 
-  <form method="post">
-    <!-- 使用HTML5日期选择器 -->
-    <label for="appointment_time">选择日期：</label>
-    <input type="date" id="appointment_time" name="appointment_time">
+      .btn-primary:hover {
+          background-color: #112434; /* 鼠标悬停时的背景颜色 */
+          border-color: #112434; /* 鼠标悬停时的边框颜色 */
+      }
 
-    <!-- 时段选择 -->
-    {% csrf_token %}
-    <label for="period">选择时段：</label>
-    <select id="period" name="period">
-      {% for k,v in options %}
-      <option value="{{k}}">{{v}}</option>
-      {% endfor %}
-    </select>
+      .form-group label {
+          margin-top: 15px; /* 或者使用 margin-top，根据需要调整 */
+      }
+    </style>
+  </head>
+  <body>
+  
+      <form method="post"> 
+        <h1>提交预约</h1>
 
-    <button type="submit">提交预约</button>
-  </form>
-
-</body>
-</html>
+        <!-- 使用HTML5日期选择器 -->
+        <div class="form-group">
+          <label for="appointment_time">选择日期：</label>
+          <input type="date" class="form-control" id="appointment_time" name="appointment_time">
+        </div>
+  
+        <!-- 时段选择 -->
+        <div class="form-group">
+          {% csrf_token %}
+          <label for="period">选择时段：</label>
+          <select class="form-control" id="period" name="period">
+            {% for k, v in options %}
+              <option value="{{ k }}">{{ v }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="row justify-content-center">
+              <button type="submit" class="btn btn-primary">提交预约</button>
+        <a href="#" class="btn btn-primary" onclick="goBack()">返回</a>
+        </div>
+      
+      </form>
+    </div>
+        <script>
+            // JavaScript 函数，用于返回上一页
+            function goBack() {
+                window.history.back();
+            }
+      </script>
+  </body>
+  </html>
