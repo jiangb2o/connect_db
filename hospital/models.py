@@ -53,7 +53,7 @@ class Registration(models.Model):
     period = models.SmallIntegerField(verbose_name='挂号时段', choices=PERIOD_CHOICES)
     status = models.CharField(verbose_name='状态', max_length=10, choices=STATUS_CHOICES)
 
-class MedicalRecord():
+class MedicalRecord(models.Model):
     '''病历'''
     symtom = models.CharField(verbose_name='症状', max_length = 200)
     diagnosis = models.CharField(verbose_name='诊断结果', max_length = 200)
