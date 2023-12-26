@@ -6,7 +6,7 @@ from django.core.validators import ValidationError
 
 class LoginForm(forms.Form):
     username = forms.fields.CharField(
-        required=True,  #必填字段
+        required=True,
         # min_length=3,
         # max_length=16,
         label="用户名",
@@ -35,23 +35,26 @@ def login(request):
     form = LoginForm(data=request.POST)
     if form.is_valid():
         print(form.cleaned_data)
-    
         login_type = request.POST.get('login_type')
         print(login_type)
         user_model = Patient if login_type == 'patient_login' else Doctor
         user = user_model.objects.filter(**form.cleaned_data).first()
-        
+        #user = 0
+
         if user:
             # 验证成功，跳转到主页
             print(user.username)
             request.session["info"] = {'id': user.id}
-            return redirect("/patient/home/")
+            if login_type == 'patient_login':
+                return redirect("/patient/home/")
+            else:
+                return redirect("/doctor/home/")    
         else:
             # 验证失败，增加错误并重新渲染
             form.add_error("password", "用户名或密码不正确")
             return render(request, "login/login.html", {"form": form})
-    else:
-        return render(request, "login/login.html", {"form": form})
+    
+    return render(request, "login/login.html", {"form": form})
 
 
 class PatientForm(forms.ModelForm):
@@ -79,7 +82,7 @@ def enroll(request):
     if request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():
-            # patient = form.save()
+            patient = form.save()
             return redirect('/login/')
     else:
         form = PatientForm()

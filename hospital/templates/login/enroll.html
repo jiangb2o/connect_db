@@ -4,80 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Registration</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            background:  url('../static/img/login.jpg');
+            background-size: cover;
+            color: #333;
+            font-family: 'Arial', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
         }
-    
-        form {
-            width: 400px;  /* Increase the width of the entire form */
-            background-color: #fff;
-            padding: 30px;  /* Increase padding for the entire form */
+        .form-container {
+            width: 480px;
+            height: 400px;
+            background-color: #a5bdd4; /* Adding some transparency */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-    
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-        }
-    
-        select,
-        input {
-            width: 90%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-    
-        input[type="submit"] {
-            margin-top: 15px;
-            background-color: #4caf50;
-            color: white;
-            cursor: pointer;
-        }
-    
-        input[type="submit"]:hover {
-            background-color: #45a049;
+            margin-top: 20px; 
+            
         }
 
-        /* 添加样式以调整错误信息的字体大小和颜色 */
-        span.error {
-            font-size: 12px;
-            color: #ff0000;  /* 或者其他你想要的颜色 */
-            display: block; /* 以块级元素显示，使得高度不受其他元素影响 */
-            margin-top: 4px; /* 添加上边距，使得与其他元素分离 */
-            margin-bottom: 8px; 
+        .form-container label {
+            font-weight: bold;
         }
+
+        .error {
+            color: #dc3545;
+            font-size: 80%;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+                background-color: aliceblue; /* 与网页背景颜色相同 */
+                border-color: #f8f9fa; /* 与网页背景颜色相同 */
+                margin: 0; /* 去除默认的body边距 */
+                margin-right: 20px;
+                color: #333;
+                text-decoration: underline;
+            }
+    
+        .btn-primary:hover {
+            background-color: #112434; /* 鼠标悬停时的背景颜色 */
+            border-color: #112434; /* 鼠标悬停时的边框颜色 */
+        }
+    
     </style>
-</head>
+    </head>
+
 <body>
+    
+            <form class="form-container" action=" " method="post" novalidate>
+        <fieldset>
+            <!-- Header -->
+            <div class="container" >
+                <div class="col-md-12 text-center" style="background-color: #a5bdd4; padding: 20px;">
+                    <div class="col-md-12 text-center">
+                        <h2>Patient Registration</h2>
+                    </div>
+                    <legend style="color: #fff; ">Fill your message!</legend>                
+                </div>
+            </div>
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    <h2>Patient Registration</h2>
+            <!-- Main Content -->
+            {% csrf_token %}
+            <div class="container" style="background-color: #fff; padding: 20px;">
+                {% for field in form %}
+                <div class="form-group">
+                    <label>{{field.label}}</label>
+                    <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            {{field}}
+                        </div>
+                        <span class="error">{{field.errors.0}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-    {% for field in form %}
-        <label>{{field.label}}</label>
-        {{field}}
-        <span class="error">{{field.errors.0}}</span>
-    {% endfor %}
-    <input type="submit" value="Register">
-</form>
-
+            <!-- Button -->
+            <div class="btn-container" style="background-color: #a5bdd4; padding: 20px;">
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <button type="submit" class="btn btn-warning">Register <span class="glyphicon glyphicon-send"></span></button>                
+                        <a href="#" class="btn btn-primary" onclick="goBack()">返回</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <script>
+        // JavaScript 函数，用于返回上一页
+        function goBack() {
+            window.history.back();
+        }
+  </script>
 </body>
 </html>

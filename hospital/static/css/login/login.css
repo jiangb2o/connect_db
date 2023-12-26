@@ -1,0 +1,141 @@
+body {
+  overflow: hidden;
+}
+.form-container {
+  position: relative;
+  min-height: 40vh;
+  background-color: aliceblue;
+  border-radius: 8px; /* 圆角边框 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  flex-grow: 1;
+}
+.navigation {
+  display: flex;
+  padding-right: 20px; /* 将标签栏放在右上角 */
+  justify-content:  flex-end; /* 将内容放在右侧 */
+  align-items: center;
+  padding-top: 20px; /* 调整与顶部的距离 */
+  margin-right: 40px;
+}
+
+.navigation li {
+list-style: none;
+margin-left: 20px;
+}
+
+.navigation li a {
+text-decoration: none;
+padding: 6px 15px;
+color: #112434;
+border-radius: 20px;
+font-size: clamp(0.9rem, 6vw, 1rem);
+}
+
+.navigation li a:hover,
+.navigation li a.active {
+background: #112434;
+color: #fff;
+}
+.contact_info {
+margin-top: 40px; /* 调整上边距来使信息下移 */
+}
+
+.contact_info i {
+font-size: 24px; /* 调整图标大小 */
+margin-bottom: 10px; /* 图标与文字之间的间距 */
+}
+
+.contact_info h4 {
+  font-size: 18px; /* 调整标题字体大小 */
+}
+
+.contact_info p {
+  font-size: 14px; /* 调整内容字体大小 */
+}
+.btn-register {
+  margin-top: 10px;
+  color: #28a745;
+}
+
+.btn-register:hover {
+  text-decoration: underline;
+}
+.btn-doctor {
+  background-color: #4ac6d9; 
+  color: #fff; /* 设置字体颜色为白色 */
+
+}
+
+
+.login {
+  width: 450px;
+  height: 450px;
+  margin-top: -20px;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+margin-top: 0;
+margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+width: 0;
+margin-right: auto;
+margin-left: auto;
+border: 12px solid transparent;
+border-bottom-color: #4ac6d9;
+}
+
+.login-header {
+background: #4ac6d9;
+padding: 20px;
+font-size: 1.4em;
+font-weight: normal;
+text-align: center;
+text-transform: uppercase;
+color: #fff;
+}
+
+.login-container {
+background: #ebebeb;
+padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+padding: 12px;
+}
+
+.login input {
+box-sizing: border-box;
+display: block;
+width: 100%;
+border-width: 1px;
+border-style: solid;
+padding: 16px;
+outline: 0;
+font-family: inherit;
+font-size: 0.95em;
+}
+
+.login input[type="username"],
+.login input[type="password"] {
+background: #fff;
+border-color: #bbb;
+color: #555;
+}
+
+/* Text fields' focus effect */
+.login input[type="username"]:focus,
+.login input[type="password"]:focus {
+border-color: #888;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 80%;
+}

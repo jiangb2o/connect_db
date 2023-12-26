@@ -1,0 +1,130 @@
+body {
+    background-color: #a5bdd4;
+    color: #333; /* 黑色文字 */
+    font-family: 'Arial', sans-serif; /* 字体样式 */
+    padding: 20px;
+    overflow: hidden;
+}
+h2 {
+    text-align: center;
+    color: #112434;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container {
+    position: relative;
+    min-height: 80vh;
+    background-color: #fff; /* 白色容器背景 */
+    border-radius: 8px; /* 圆角边框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    flex-grow: 1;
+    margin-right: 30px; /* 将 margin-right 移动到这里 */
+    margin-top: 34px;
+    margin-left: 250px;
+}
+
+
+.action-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+button {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* 水平居中对齐 */
+    justify-content: center;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.btn-able{
+    background-color: #4caf50;
+    color: #fff;
+}
+.btn-disable {
+    background-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+}
+.btn-able:hover {
+    background-color: #a5bdd4; /* 鼠标悬停时的背景颜色 */
+    border-color: #a5bdd4; /* 鼠标悬停时的边框颜色 */
+    color: #112434;
+}
+        /* 添加左侧菜单栏样式 */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0c1e35;
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    margin-top: 80px; /* 调整上边距，将菜单栏下移 */
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #0c1e35;
+    background-color: #fff;
+}
+.sidenav a.active {
+    background: #fff;
+    color: #112434;
+}
+th {
+    text-align: center;
+
+}
+.navigation {
+    display: flex ;
+    justify-content: right ;
+    align-items: center;
+    margin-right: 30px ;
+    margin-top: -30px; 
+}
+  
+  .navigation li {
+    list-style: none;
+    margin-left: 20px;
+    
+  }
+  
+  .navigation li a {
+    text-decoration: none;
+    padding: 6px 15px;
+    color: #112434;
+    border: 1px solid #112434; /* 添加边框颜色 */
+    border-radius: 20px;
+    font-size: clamp(0.9rem, 6vw, 1rem);
+  }
+  
+
+  .navigation li a.active {
+    background: #112434;
+    color: #fff;
+  } 
+   .navigation li a:hover {
+    background: #112434;
+    color: #fff;
+  }
+
+h5 {
+    font-family: 'Arial', sans-serif;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-align: left;
+}

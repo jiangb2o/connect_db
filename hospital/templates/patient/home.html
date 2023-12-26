@@ -1,91 +1,129 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医院主页</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>home</title>
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/bootstrap/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/static/css/bootstrap/style.css"/>
+<style>
+    body {
+        overflow: hidden;
+    }
+    .navigation {
+        display: flex;
+        padding-right: 20px; /* 将标签栏放在右上角 */
+        justify-content:  flex-end; /* 将内容放在右侧 */
+        align-items: center;
+        padding-top: 20px; /* 调整与顶部的距离 */
+}
 
-        header {
-            background-color: #3498db;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
+.navigation li {
+  list-style: none;
+  margin-left: 20px;
+}
 
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
+.navigation li a {
+  text-decoration: none;
+  padding: 6px 15px;
+  color: #112434;
+  border-radius: 20px;
+  font-size: clamp(0.9rem, 6vw, 1rem);
+}
 
-        nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+.navigation li a:hover,
+.navigation li a.active {
+  background: #112434;
+  color: #fff;
+}
+.contact_info {
+  margin-top: 40px; /* 调整上边距来使信息下移 */
+}
 
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+.contact_info i {
+  font-size: 24px; /* 调整图标大小 */
+  margin-bottom: 10px; /* 图标与文字之间的间距 */
+}
 
-        section {
-            padding: 40px;
-            text-align: center;
-        }
+.contact_info h4 {
+  font-size: 18px; /* 调整标题字体大小 */
+}
 
-        section h2 {
-            color: #333;
-        }
+.contact_info p {
+  font-size: 14px; /* 调整内容字体大小 */
+}
+</style>
 
-        section p {
-            color: #555;
-            font-size: 1.2em;
-            line-height: 1.6em;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
 </head>
+
 <body>
-
-    <header>
-        <h1>至善医院</h1>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header >      
+            <ul class="navigation">               
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="/patient/register">预约挂号</a></li>
+                <li><a href="/patient/registrations">个人中心</a></li>
+              </ul>
     </header>
-
-    <nav>
-        <a href="">首页</a>
-        <a href="/patient/records">个人中心</a>
-        <a href="/patient/register">预约挂号</a>
-    </nav>
-
-    <section>
-        <h2>欢迎访问医院主页</h2>
-        <p>我们致力于为患者提供高质量的医疗服务，关心您的健康。通过专业的医生团队和先进的医疗设施，我们竭诚为您服务。</p>
-        <p>在这里，我们不仅提供全面的医疗服务，还致力于预防和健康教育。我们的目标是让每一位患者都能够获得最佳的医疗体验。</p>
+    <!-- end header section -->
+    <!-- content section -->
+    <section class=" slider_section position-relative">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  data-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="detail-box">
+                    <div>
+                      <h1>
+                        health care
+                      </h1>
+                      <p>
+                        Excepturi quam cum ex, expedita inventore adipisci reprehenderit incidunt doloribus delectus quod, placeat nulla culpa nemo, mollitia natus! Beatae illo quas nemo omnis ullam placeat, obcaecati ducimus rem id. Consectetur.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="img-box">
+                    <img src="/static/img/slider-img.png" alt="">
+                  </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="contact_info">
+                          <h4>Email</h4>
+                          <p>info@example.com</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="contact_info">
+                          <h4>Phone</h4>
+                          <p>+123 456 7890</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="contact_info">
+                          <h4>Address: </h4>
+                          <p>123 Street, City, Country</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>     
+        </div>
+      </div>      
     </section>
-
-    <footer>
-        <p>&copy; 2023 至善医院. All rights reserved.</p>
-    </footer>
-
+  </div>
 </body>
 </html>

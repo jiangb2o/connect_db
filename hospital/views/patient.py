@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from hospital.models import Patient, Doctor, Registration
+from hospital.models import Patient, Doctor, Registration, Department
 from datetime import datetime
 from django.core.paginator import Paginator
 
@@ -8,20 +8,24 @@ def home(request):
     return render(request, 'patient/home.html')
 
 def register(request):
-    doctors_data = Doctor.objects.all()
+    doctors = Doctor.objects.all()
+    departments = Department.objects.all()
+
 
     name_query = request.GET.get('name', '')
     dept_query = request.GET.get('department', '')
     
     if name_query:
-        doctors_data = doctors_data.filter(name=name_query)
+        doctors = doctors.filter(name=name_query)
     
     if dept_query:
-        doctors_data = doctors_data.filter(dept=dept_query)
+        doctors = doctors.filter(dept=dept_query)
 
-    # doctors_data = [] # 运行时注释此行
-
-    return render(request, 'patient/register.html', {'doctors_data': doctors_data, 'name_query': name_query, 'dept_query': dept_query})
+    # doctors = [] # 运行时注释此行
+    # 转换为int 在前端进行比较
+    dept_query = int(dept_query, base=10) if dept_query != '' else 0
+    
+    return render(request, 'patient/register.html', {'doctors': doctors, 'name_query': name_query, 'dept_query': (dept_query), 'departments' : departments})
     
 def register_sucess(request):
     return render(request, 'patient/register_success.html')
@@ -45,7 +49,7 @@ def register_appoint(request, doctor_id):
             patient=patient,
             registration_time=appointment_datetime,
             period=period,
-            status='registered',
+            status=0,
         )
 
         return redirect('/patient/register/success/')
@@ -56,23 +60,38 @@ def register_appoint(request, doctor_id):
 def register_appoint_test(request):
     return render(request, 'patient/register_appoint.html')
 
-def records(request):
-    userid = request.session['info']['id']
-    registrations = Registration.objects.filter(patient=userid)
-    return render(request, 'patient/records.html', {'registrations':registrations})
+def registrations(request):
+    patient_id = request.session.get('info')['id']
+    patient = Patient.objects.get(id=patient_id)
+    registrations = Registration.objects.filter(patient=patient)
+    return render(request, 'patient/registraions.html', {'registrations':registrations})
 
 def cancel_registration(request, registration_id):
     registration = get_object_or_404(Registration, pk=registration_id)
-    if request['info']['id'] == registration.patient and registration.status == 'registered':
-        registration.status = 'cancelled'
+    if registration.status == 0:
+        registration.status = 1
         registration.save()
     
-    return redirect('/patient/records/')
+    return redirect('/patient/registrations/')
+
+def personnel(request):
+    doctors = Doctor.objects.all()
+    departments = Department.objects.all()
+    return render(request, 'patient/personnel.html', {'doctors': doctors, 'departments': departments})
+
+def profile(request, doctor_id):
+    return render(request, 'patient/profile.html', {'doctor_id': doctor_id})
+
+def medical_record(request, registration_id):
+    return render(request, 'patient/medical_record.html', {'registration_id': registration_id})
+
+def personal(request):
+    return render(request, 'patient/personal.html')
 
 def mytest(request):
-    # contact_list = Contact.objects.all()
+    # patient_list = Patient.objects.all()
     mylist = [1,2,3,4,5,6,7,8,9,10]
-    paginator = Paginator(mylist, 2) # Show 25 contacts per page.
+    paginator = Paginator(mylist, 2)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

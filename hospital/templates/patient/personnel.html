@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Doctor Introductions</title>
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/patient/register.css">
+    <style>
+        .department-container {
+            background-color: #fff; /* 设置背景色为蓝色 */
+            color: #112434; /* 设置文字颜色为白色 */
+            margin-top: -10px;;
+            margin-bottom: 20px; /* 调整科室容器的底边距 */
+            white-space: nowrap; /* 防止医生容器换行 */
+            overflow-y: auto; /* 允许竖直滚动 */
+        }
+
+        .department-name {
+            font-size: 1.2em;
+            background-color: #a5bdd4; /* 设置科室名字背景颜色 */
+            color: #fff; /* 设置科室名字文字颜色 */
+            padding: 10px; /* 设置内边距 */
+            margin: 0; /* 去除默认外边距 */
+            white-space: nowrap; /* 防止科室名字换行 */
+        }
+        .doctor-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: inline-block; /* 使医生容器水平排列 */
+            white-space: normal; /* 允许医生容器内部换行 */
+            overflow-x: auto; /* 允许水平滚动 */
+            padding:0px;
+        }
+
+        .doctor-card {
+            width: 200px;
+            margin: 10px;
+            border: 1px solid #a5bdd4;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .doctor-name {
+            font-size: 1.0em;
+            font-weight: bold;
+            margin: 0px;
+        }
+
+        .doctor-title {
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .details-link {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: #a5bdd4;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .details-link:hover {
+            background-color: #112434; /* 鼠标悬停时的背景颜色 */
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h5>患者界面</h5>
+        <ul class="navigation">
+            <li><a href="home.html" >Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="" class="active">Details</a></li>
+            <li><a href="SelfMeg.html">Personal</a></li>
+        </ul>
+    </header>
+
+    <!-- 菜单栏和页面内容容器 -->
+    <div class="menu-container">
+        <!-- 菜单栏 -->
+        <div class="sidenav">
+            <a href="/patient/register" >预约</a>
+            <a href="" class="active">医生介绍</a>
+            <a href="/patient/personal">个人界面</a>
+        </div>
+
+            <!-- 医生介绍部分 -->  
+            {% for depart in departments %}
+                <div class="department-container">
+                    <h4 class="department-name">{{ depart.name }}科室</h4>
+                    <div class="doctor-container">
+                        {% for doctor in doctors %}
+                            {% if doctor.dept == depart %}
+                            <div class="doctor-card">
+                                <p class="doctor-name">{{ doctor.name }}</p>
+                                <p class="doctor-title">{{ doctor.title }}</p>
+                                <a href="/patient/profile/{{ doctor.id }}" class="details-link">详情</a>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+    
+</body>
+</html>
