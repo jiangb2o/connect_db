@@ -26,6 +26,8 @@ class Doctor(models.Model):
     dept = models.ForeignKey(to=Department, to_field='id', on_delete=models.CASCADE)
     profile = models.CharField(verbose_name='简介', max_length = 200)
 
+
+
 class Registration(models.Model):
     '''挂号记录'''
 
