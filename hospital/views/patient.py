@@ -64,7 +64,7 @@ def registrations(request):
 
 def cancel_registration(request, registration_id):
     registration = get_object_or_404(Registration, pk=registration_id)
-    if request['info']['id'] == registration.patient and registration.status == 'registered':
+    if registration.status == 'registered':
         registration.status = 'cancelled'
         registration.save()
     

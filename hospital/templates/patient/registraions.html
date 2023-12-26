@@ -36,7 +36,10 @@
         <td>{{ registration.period }}</td>
         <td>{{ registration.status }}</td>
         {% if registration.status == 'registered' %}
-        <td><a href="{/patient/cancel_registration/ {{registration.id}}}" style=" text-decoration: underline;">取消预约</a></td>
+        <td><a href="/patient/cancel_registration/{{ registration.id }}" style=" text-decoration: underline;">取消预约</a></td>
+        {% endif %}
+        {% if registration.status == 'cancelled' %}
+        <td>预约已取消</td>
         {% endif %}
       </tr>
       {% endfor %}
