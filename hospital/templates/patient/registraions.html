@@ -32,7 +32,7 @@
       {% for registration in registrations %}
       <tr>
         <td>{{ registration.doctor.name }}</td>
-        <td>{{ registration.resgitration_time }}</td>
+        <td>{{ registration.registration_time }}</td>
         <td>{{ registration.period }}</td>
         <td>{{ registration.status }}</td>
         {% if registration.status == 'registered' %}
