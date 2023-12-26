@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from hospital.models import Patient, Doctor, Registration
+from hospital.models import Patient, Doctor, Registration, Department
 from datetime import datetime
 from django.core.paginator import Paginator
 
@@ -68,20 +68,21 @@ def cancel_registration(request, registration_id):
         registration.status = 'cancelled'
         registration.save()
     
-    return redirect('/patient/records/')
+    return redirect('/patient/registrations/')
 
 def personnel(request):
     doctors = Doctor.objects.all()
-    return render('patient/personnel.html', {'doctors': doctors})
+    departments = Department.objects.all()
+    return render(request, 'patient/personnel.html', {'doctors': doctors, 'departments': departments})
 
 def profile(request, doctor_id):
-    return render('patient/profile.html', {'doctor_id': doctor_id})
+    return render(request, 'patient/profile.html', {'doctor_id': doctor_id})
 
 def medical_record(request, registration_id):
-    return render('patient/medical_record.html', {'registration_id': registration_id})
+    return render(request, 'patient/medical_record.html', {'registration_id': registration_id})
 
 def personal(request):
-    return render('patient/personal.html')
+    return render(request, 'patient/personal.html')
 
 def mytest(request):
     # patient_list = Patient.objects.all()

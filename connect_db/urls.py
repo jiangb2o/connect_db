@@ -32,7 +32,7 @@ urlpatterns = [
     path("patient/registrations/", patient.registrations),
     path("patient/cancel_registration/<int:registration_id>/", patient.cancel_registration),
     path("patient/personnel/", patient.personnel),
-    path("patient/profile/<int:doctor_id>/", patient.cancel_registration),
+    path("patient/profile/<int:doctor_id>/", patient.profile),
     path('patient/medical_record/', patient.medical_record),
     path('patient/personal/', patient.personal),
     path("mytest/", patient.mytest),

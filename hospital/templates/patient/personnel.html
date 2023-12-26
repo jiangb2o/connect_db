@@ -88,39 +88,27 @@
         <div class="sidenav">
             <a href="register.html" >预约</a>
             <a href="" class="active">医生介绍</a>
-            <a href="SelfMeg.html">个人界面</a>
+            <a href="/patient/personal">个人界面</a>
         </div>
-        <div class="container">
-            <!-- 搜索栏 -->
-            <form method="get" action="/register/">
-                <label for="name" style="font-weight: bold;">医生姓名：</label>
-                <input type="text" id="name" name="name" value="{{ name_query }}" style="margin-right: 10px;">
-                <label for="department" style="font-weight: bold;">科室：</label>
-                <select id="department" name="department">
-                    <option value="" selected style="color: #999;">输入科室</option>
-                    {% for department in all_departments %}
-                        <option value="{{ department.id }}" {% if department.id == dept_query %}selected{% endif %}>{{ department.name }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </form>
 
             <!-- 医生介绍部分 -->  
-            {% for depart in Department %}
+            {% for depart in departments %}
                 <div class="department-container">
                     <h4 class="department-name">{{ depart.name }}科室</h4>
                     <div class="doctor-container">
-                        {% for doctor in depart.doctors %}
+                        {% for doctor in doctors %}
+                            {% if doctor.dept == depart %}
                             <div class="doctor-card">
                                 <p class="doctor-name">{{ doctor.name }}</p>
                                 <p class="doctor-title">{{ doctor.title }}</p>
-                                <a href="/doctorMeg/{{ doctor.id }}" class="details-link">详情</a>
+                                <a href="/patient/profile/{{ doctor.id }}" class="details-link">详情</a>
                             </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
             {% endfor %}
-        </div>
     </div>
+    
 </body>
 </html>

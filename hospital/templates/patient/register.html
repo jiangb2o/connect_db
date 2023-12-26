@@ -27,12 +27,12 @@
         <!-- 菜单栏 -->
         <div class="sidenav">
             <a href="#" class="active">预约</a>
-            <a href="doctor_introductions.html">医生介绍</a>
-            <a href="personal.html">个人界面</a>
+            <a href="/patient/personnel">医生介绍</a>
+            <a href="/patient/personal">个人界面</a>
         </div>
         
 <div class="container">
-    <form  method="get" action="/register/">
+    <form  method="get" action="/patient/register/">
         <label for="name" style=" font-weight: bold;">医生姓名：</label>
         <input type="text" id="name" name="name" value="{{ name_query }}" style="margin-right: 10px;">
         <label for="department" style=" font-weight: bold;">科室：</label>
@@ -54,21 +54,21 @@
         </tr>
         </thead>
         <script>
-            function redirectToAppointment(doctorName, deptName) {
+            function redirectToAppointment(doctorID) {
                 // 构建预约界面的URL，你可能需要根据实际情况修改路径
-                var appointmentURL = '/register_appoint?doctor.name=' + encodeURIComponent(doctorName) + '&doctor.dept.name=' + encodeURIComponent(deptName);          
+                var appointmentURL = '/patient/register/appoint/' + encodeURIComponent(doctorID);          
                 // 进行页面重定向
                 window.location.href = appointmentURL;
             }
             </script>
         <tbody>
-        {% for doctor in page_obj %}
+        {% for doctor in doctors_data %}
         <tr>
             <td>{{ doctor.name }}</td>
             <td>{{ doctor.dept.name }}</td>
             <td>
             <!-- 预约按钮，点击后调用 showAppointmentModal 函数 -->
-            <button class="btn btn-primary" style="background-color: #a5bdd4;" onclick="redirectToAppointment('{{ doctor.name }}', '{{ doctor.dept.name }}')">预约</button>
+            <button class="btn btn-primary" style="background-color: #a5bdd4;" onclick="redirectToAppointment('{{ doctor.id }}')">预约</button>
             </td>
         </tr>
         {% endfor %}
