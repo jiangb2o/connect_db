@@ -8,20 +8,21 @@ def home(request):
     return render(request, 'patient/home.html')
 
 def register(request):
-    doctors_data = Doctor.objects.all()
+    doctors = Doctor.objects.all()
+    departments = Department.objects.all()
+
 
     name_query = request.GET.get('name', '')
     dept_query = request.GET.get('department', '')
     
     if name_query:
-        doctors_data = doctors_data.filter(name=name_query)
+        doctors = doctors.filter(name=name_query)
     
     if dept_query:
-        doctors_data = doctors_data.filter(dept=dept_query)
+        doctors = doctors.filter(dept=dept_query)
 
-    # doctors_data = [] # 运行时注释此行
-
-    return render(request, 'patient/register.html', {'doctors_data': doctors_data, 'name_query': name_query, 'dept_query': dept_query})
+    # doctors = [] # 运行时注释此行
+    return render(request, 'patient/register.html', {'doctors': doctors, 'name_query': name_query, 'dept_query': dept_query, 'departments' : departments})
     
 def register_sucess(request):
     return render(request, 'patient/register_success.html')
