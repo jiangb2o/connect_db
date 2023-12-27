@@ -30,7 +30,9 @@ def medical_record(request, registration_id):
         medical_record = None
 
     form = MedicalRecordForm(request.POST, instance=medical_record)
+    
     if form.is_valid():
+        print('form is valid')
         medical_record = form.save(commit=False)
         medical_record.registration = registration
         medical_record.save()

@@ -86,3 +86,5 @@ def enroll(request):
             return redirect('/login/')
     else:
         form = PatientForm()
+    
+    return render(request, "login/enroll.html", {"form": form})

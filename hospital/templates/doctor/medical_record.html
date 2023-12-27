@@ -80,31 +80,27 @@
     </script>
     <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
 
-    <!-- 添加表单 -->
+    <form method="post">
       {% csrf_token %}
-      <table>
-        <thead>
-          <tr>
-            <th>患者信息</th>
-            <th>症状</th>
-            <th>诊断结果</th>
-            <th>治疗方案</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ registration_id.patient.name }}</td>
-            <!-- 添加输入框 -->
-            <td><input type="text" name="symptom" value="{{ registration_id.symptom }}"></td>
-            <td><input type="text" name="diagnosis" value="{{ registration_id.diagnosis }}"></td>
-            <td><input type="text" name="solution" value="{{ registration_id.solution }}"></td>
-            <td><button type="submit" class="btn btn-primary">保存</button></td>
-          </tr>
-        </tbody>
-      </table>
-      
-  </div>
+
+      <!-- 症状 -->
+      <label for="{{ form.symtom.id_for_label }}">症状:</label>
+      {{ form.symtom }}
+      <br>
+    
+      <!-- 诊断结果 -->
+      <label for="{{ form.diagnosis.id_for_label }}">诊断结果:</label>
+      {{ form.diagnosis }}
+      <br>
+    
+      <!-- 治疗方案 -->
+      <label for="{{ form.solution.id_for_label }}">治疗方案:</label>
+      <textarea id="{{ form.solution.id_for_label }}" name="{{ form.solution.name }}"
+                rows="5" cols="40">{{ form.solution.value }}</textarea>
+      <br>
+    
+      <button type="submit" name="save">保存</button>
     </form>
+
 </body>
 </html>
