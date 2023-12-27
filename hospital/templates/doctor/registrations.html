@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,25 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>医生登录 - 患者预约记录</title>
-    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/doctor/registrations.css">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/doctor/registrations.css'%}">
 </head>
 
 <body>
     <header> <h5>医生界面</h5> 
-        <ul class="navigation">                                
-          <li><a  >Home</a></li>
-          <li><a >Login</a></li>
-          <li><a class="active">Registration</a></li>
-          <li><a >Personal</a></li>
-        </ul>
-      </header>
+    </header>
     <!-- 菜单栏和页面内容容器 -->
     <div class="menu-container">
         <!-- 菜单栏 -->
         <div class="sidenav"> 
             <a href="/doctor/home">首页</a>
-            <a href="/doctor/registrations" class="active">患者预约记录</a>         
+            <a href="#" class="active">患者预约记录</a>         
         </div>
 
     <div class="container">
@@ -40,62 +36,76 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 示例数据 -->
                 {% for registration in registrations %}
                 <tr>
                     <td>{{ registration.patient.name }}</td>
-                    <td>{{ registration.registration_time|date:"Y年 m月 d日"}}</td>
+                    <td>{{ registration.registration_time|date:"Y 年 m 月 d 日"}}</td>
                     <td>{{ registration.get_period_display }}</td>
                     <td>{{ registration.get_status_display }}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn btn-able" onclick="acceptAppointment(this)">接诊</button>
-                            <button class="btn btn-disable" onclick="fillCase(this)" disabled>填写病例</button>
-                            <button class="btn btn-disable" onclick="endVisit(this)" disabled>结束就诊</button>
+                            {% if registration.status == 0 %}
+                                <button class="btn btn-able" onclick="acceptAppointment(this, {{ registration.id}})">接诊</button>
+                            {% else %}
+                                <button class="btn btn-disable">接诊</button>
+                            {% endif %}
+
+                            {% if registration.status == 2 %}
+                                <button class="btn btn-able" onclick="fillCase(this, {{ registration.id}})">填写病例</button>
+                            {% else %}
+                                <button class="btn btn-disable">填写病例</button>
+                            {% endif %}
+
+                            {% if registration.status == 2 %}
+                                <button class="btn btn-able" onclick="endVisit(this, {{ registration.id}})">结束就诊</button>
+                            {% else %}
+                                <button class="btn btn-disable">结束就诊</button>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>
                 {% endfor %}
-                <!-- 更多患者记录... -->
             </tbody>
         </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if registrations.has_previous %}
+                    <a href="?page=1">&laquo; 首页</a>
+                    <a href="?page={{ registrations.previous_page_number }}">上一页</a>
+                {% else %}
+                <a>&laquo; 首页</a>
+                <a>上一页</a>
+                {% endif %}
+        
+                <span class="current">
+                    第 {{ registrations.number }} / {{ registrations.paginator.num_pages }} 页
+                </span>
+        
+                {% if registrations.has_next %}
+                    <a href="?page={{ registrations.next_page_number }}">下一页</a>
+                    <a href="?page={{ registrations.paginator.num_pages }}">尾页 &raquo;</a>
+                {% else %}
+                <a>下一页</a>
+                <a>尾页 &raquo;</a>                    
+                {% endif %}
+            </span>
+        </div>
     </div>
+    
 
     <script>
-        function acceptAppointment(btn) {
-            // 模拟接诊操作
+        function acceptAppointment(btn, registrationID) {
             alert('接诊成功！');
-            // 禁用接诊按钮，启用填写病例按钮
-            btn.disabled = true;
-            btn.nextElementSibling.disabled = false;
-            btn.nextElementSibling.nextElementSibling.disabled = false;
-            // 设置接诊按钮的颜色
-            btn.classList.remove('btn-accept'); // 移除原有颜色类
-            btn.classList.add('btn-disable'); // 添加新的颜色类
-            btn.nextElementSibling.classList.remove('btn-disable');
-            btn.nextElementSibling.classList.add('btn-able');
+            window.location.href = '/doctor/accept/'+registrationID;
         }
 
-        function fillCase(btn) {
-            // 模拟填写病例操作
-            alert('填写病例成功！');
-            // 启用结束就诊按钮，禁用填写病例按钮
-            btn.previousElementSibling.disabled = true;//btn1
-            btn.disabled = true;//btn2
-            btn.nextElementSibling.disabled = false;//btn3
-            btn.classList.remove('btn-accept'); // 移除原有颜色类
-            btn.classList.add('btn-disable'); // 添加新的颜色类
-            btn.nextElementSibling.classList.remove('btn-disable');
-            btn.nextElementSibling.classList.add('btn-able');
+        function fillCase(btn, registrationID) {
+            window.location.href = '/doctor/medical_record/'+registrationID;
         }
 
-        function endVisit(btn) {
-            // 模拟结束就诊操作
+        function endVisit(btn, registrationID) {
             alert('就诊结束！');
-            // 禁用所有按钮
-            btn.disabled = true;
-            btn.classList.remove('btn-accept'); // 移除原有颜色类
-            btn.classList.add('btn-disable'); // 添加新的颜色类
+            window.location.href = '/doctor/finish/'+registrationID;
         }
     </script>
 </body>

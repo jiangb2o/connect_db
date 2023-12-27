@@ -39,5 +39,7 @@ urlpatterns = [
 
     path('doctor/home/', doctor.home),
     path('doctor/registrations/', doctor.registrations),
-    path('doctor/medical_record/<int:registration_id>', doctor.medical_record),
+    path('doctor/medical_record/<int:registration_id>/', doctor.medical_record),
+    path('doctor/accept/<int:registration_id>/', doctor.accept),
+    path('doctor/finish/<int:registration_id>/', doctor.finish),
 ]

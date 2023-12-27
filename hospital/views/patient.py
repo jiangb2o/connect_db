@@ -22,7 +22,7 @@ def register(request):
         doctors = doctors.filter(dept=dept_query)
 
     # 分页
-    paginator = Paginator(doctors, 5)
+    paginator = Paginator(doctors, 10)
     page_number = request.GET.get('page')
     doctors = paginator.get_page(page_number)
 
@@ -68,6 +68,12 @@ def registrations(request):
     patient_id = request.session.get('info')['id']
     patient = Patient.objects.get(id=patient_id)
     registrations = Registration.objects.filter(patient=patient)
+
+    # 分页
+    paginator = Paginator(registrations, 10)
+    page_number = request.GET.get('page')
+    registrations = paginator.get_page(page_number)
+
     return render(request, 'patient/registrations.html', {'registrations':registrations})
 
 def cancel_registration(request, registration_id):
@@ -79,15 +85,14 @@ def cancel_registration(request, registration_id):
     return redirect('/patient/registrations/')
 
 
-
-
 def personnel(request):
     doctors = Doctor.objects.all()
     departments = Department.objects.all()
     return render(request, 'patient/personnel.html', {'doctors': doctors, 'departments': departments})
 
 def profile(request, doctor_id):
-    return render(request, 'patient/profile.html', {'doctor_id': doctor_id})
+    doctor = get_object_or_404(Doctor, pk=doctor_id)
+    return render(request, 'patient/profile.html', {'doctor': doctor})
 
 def medical_record(request, registration_id):
     return render(request, 'patient/medical_record.html', {'registration_id': registration_id})

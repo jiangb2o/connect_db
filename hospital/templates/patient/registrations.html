@@ -47,18 +47,24 @@
   </table>
   <div class="pagination">
     <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% if registrations.has_previous %}
+            <a href="?page=1">&laquo; 首页</a>
+            <a href="?page={{ registrations.previous_page_number }}">上一页</a>
+        {% else %}
+        <a>&laquo; 首页</a>
+        <a>上一页</a>
         {% endif %}
 
         <span class="current">
-            第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} 页
+            第 {{ registrations.number }} / {{ registrations.paginator.num_pages }} 页
         </span>
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% if registrations.has_next %}
+            <a href="?page={{ registrations.next_page_number }}">下一页</a>
+            <a href="?page={{ registrations.paginator.num_pages }}">尾页 &raquo;</a>
+        {% else %}
+        <a>下一页</a>
+        <a>尾页 &raquo;</a>                    
         {% endif %}
     </span>
 </div>

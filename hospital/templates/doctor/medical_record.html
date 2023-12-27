@@ -8,12 +8,12 @@
 
   <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}"/>
   <link rel="stylesheet" href="{% static 'css/patient/registrations.css'%}"/>
-
+  
   <style>
     /* 调整输入框的大小 */
     table textarea {
         width: 100%;
-        height: 100px; /* 调整输入框的高度 */
+        height: 150px; /* 调整输入框的高度 */
     }
 
     .btn-primary {
@@ -31,14 +31,13 @@
     }
 
     table {
-        
-        width: 80%; /* 设置表格宽度为页面宽度的80% */
+        width: 70%; /* 设置表格宽度为页面宽度的80% */
         margin: auto; /* 设置左右外边距为 auto，实现水平居中 */
         border-collapse: collapse; /* 合并单元格边框 */
     }
 
     th, td {
-        padding: 10px; /* 设置单元格内边距 */
+        padding: 15px; /* 设置单元格内边距 */
         text-align: center; /* 文字水平居中 */
         
     }
@@ -46,51 +45,58 @@
     th {
         font-size: 16px; /* 调整表头字体大小 */
     }
+
+    .error {
+        color: #dc3545;
+        font-size: 95%;
+    }
+
+    .name {
+        font-size: 125%;
+    }
   </style>
 </head>
 <body>
-  <h1 >填写病例</h1>
-  <script>
-    function goBack() {
-      window.history.back();
-    }
-  </script>
-  <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
+  <h1>填写病历</h1>
+  <a href="/doctor/registrations" class="return-link">返回上一页</a>
 
-  
-
-  <!-- 在这里添加表单标签 -->
   <form method="post" style="margin-top: 30px;">
     {% csrf_token %}
     <table>
-      <tbody>
-        <tr>
-          <th style=" width:100px;">患者信息</th>
-          <!-- <td style="text-align: left;">{{ form.symtom }}</td> -->
-          
-        </tr>
-        <tr>
-          <th style=" width:100px;">症状</th>
-          <td><textarea name="symptom">{{ form.symptom.value }}</textarea></td>
-  
-        </tr>
-        <tr>
-          <th style=" width:100px;">诊断结果</th>
-          <td><textarea name="diagnosis">{{ form.diagnosis.value }}</textarea></td>
-          
-        </tr>
-        <tr>
-          <th style=" width:100px;">治疗方案</th>
-          <td><textarea name="solution">{{ form.solution.value }}</textarea></td>
-          
-        </tr>
-        <tr>
-          <th style=" width:100px;">操作</th>
-          <td><button type="submit" class="btn btn-primary">保存</button></td>
-         
-        </tr>
-      </tbody>
+        <tbody>
+            <tr>
+                <th style="width:100px;">患者姓名</th>
+                <td>
+                  <span class="name">{{ patient.name }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th style="width:100px;">症状</th>
+                <td>
+                    <textarea name="symptom">{{ form.symptom.value }}</textarea>
+                    <span class="error">{{ form.symptom.errors.0 }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th style="width:100px;">诊断结果</th>
+                <td>
+                    <textarea name="diagnosis">{{ form.diagnosis.value }}</textarea>
+                    <span class="error">{{ form.diagnosis.errors.0 }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th style="width:100px;">治疗方案</th>
+                <td>
+                    <textarea name="solution">{{ form.solution.value }}</textarea>
+                    <span class="error">{{ form.solution.errors.0 }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th style="width:100px;"></th>
+                <td><button type="submit" class="btn btn-primary">保存</button></td>
+            </tr>
+        </tbody>
     </table>
-  </form>
+</form>
 </body>
 </html>

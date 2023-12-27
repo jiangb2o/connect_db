@@ -5,30 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>医生详情</title>
   <!-- 引入Bootstrap样式 -->
-  <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/hospital/static/css/bootstrap/bootstrap.min.css">
 
+  <link rel="stylesheet" href="/hospital/static/css/patient/registrations.css"/>
   <style>
     /* 自定义样式 */
     body {
       height: 100%;
       background-color: #a5bdd4; /* 设置白色背景 */
+      overflow: hidden;
 }
 
-    .patient-info-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* 在垂直方向上居中 */
-        padding: 20px;
-        margin: 20px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px; /* 调整padding */
-        max-width: 400px; /* 调整max-width */
-        margin: 80px; /* 使用 auto 将容器居中，并添加顶部和底部的 margin */
-    
-    }
-
+  .container {
+    background-color:#f8f9fa;
+    width: 90%;
+    height: 94vh;
+  }
     /* 示例按钮样式 */
     .btn-primary {
         background-color: #98b0c6; /* 与网页背景颜色相同 */
@@ -54,39 +46,65 @@
   width: auto; /* 让输入框自适应内容宽度 */
   margin: 0 5px; /* 添加一些水平间距 */
 }
+ h3 {
+  text-align: left;
+  padding-top: 20px;
+  color: #f8f9fa;
+  padding-bottom: 10px;
+  
+ }
+ label {
+  font-size: 20px;
+ }
+ p {
+  font-size: 18px;
+  line-height: 24px;
+ }
   </style>
 </head>
 <body>
-
-  <div class="container mt-5 patient-info-container mx-auto">
-    <h2 class="text-center" >More Message</h2>
-
-      <!-- 添加医生照片 -->
-    <img src="{{ doctor.photo_url }}" class="doctor-img">
-
-
-    <div class="form-group">
-      <label for="name">姓名: </label>
-      <input type="text" class="form-control" value="{{ doctor.name }}" readonly>
-    </div>
-
-    <div class="form-group">
-      <label for="username">职称:</label>
-      <input type="text" class="form-control" value="{{ doctor.title }}" readonly>
-    </div>
-
-    <div class="form-group">
-      <label for="age">简介:</label>
-      <input type="text" class="form-control" value="{{ doctor.profile }}" readonly>
-    </div>
-
-    <a href="#" class="btn btn-primary" onclick="goBack()">返回</a>
-  </div>
   <script>
-        // JavaScript 函数，用于返回上一页
-        function goBack() {
-            window.history.back();
-        }
-  </script>
+    function goBack() {  
+        window.history.back();
+    }
+</script>
+<a href="#" class="return-link" onclick="goBack()">返回上一页</a>
+  <div class="container "> 
+      <div class="col-12 text-center" style="background-color: #112434;">
+          <h3>详情介绍</h3>
+      </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>{{ doctor.name }}</h1>
+      </div>
+    </div><hr>
+  
+    <div class="row mt-3" style="text-align: center; " >
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="title"> 职称: {{ doctor.title }} </label>
+          
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="department">所属科室: {{ doctor.department }}</label>
+        </div>
+      </div>
+    </div>
+    <hr>
+  
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group" style="text-align: center;">
+          <label for="profile">简介:</label>
+          <p>{{ doctor.profile }}</p>
+        </div>
+      </div>
+    </div>
+  
+    
+  </div>
+
 </body>
 </html>
