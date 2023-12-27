@@ -19,7 +19,8 @@ class MedicalRecordForm(forms.ModelForm):
 
 def medical_record(request, registration_id):
     if request.method == 'GET':
-        return render(request, 'doctor/medical_record.html', {'registration_id': registration_id})
+        form = MedicalRecordForm()
+        return render(request, 'doctor/medical_record.html')
 
     registration = get_object_or_404(Registration, pk=registration_id)
     
@@ -28,10 +29,9 @@ def medical_record(request, registration_id):
     except MedicalRecord.DoesNotExist:
         medical_record = None
 
-    if request.method == 'POST':
-        form = MedicalRecordForm(request.POST, instance=medical_record)
-        if form.is_valid():
-            medical_record = form.save(commit=False)
-            medical_record.registration = registration
-            medical_record.save()
-            return redirect(f'/doctor/medical_record/{registration_id}')  # 重定向到成功页面
+    form = MedicalRecordForm(request.POST, instance=medical_record)
+    if form.is_valid():
+        medical_record = form.save(commit=False)
+        medical_record.registration = registration
+        medical_record.save()
+        return redirect(f'/doctor/medical_record/{registration_id}')
