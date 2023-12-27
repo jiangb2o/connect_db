@@ -15,7 +15,7 @@ class RegistrationAdmin(admin.ModelAdmin):
     list_display = ("id", "doctor_id", "patient_id", "registration_time", "period", "status")
 
 class MedicalRecordAdmin(admin.ModelAdmin):
-    list_display = ("id", "symtom", "diagnosis", "solution", "registration_id")
+    list_display = ("id", "symptom", "diagnosis", "solution", "registration_id")
 
 admin.site.register(models.Patient, PatientAdmin)
 admin.site.register(models.Doctor, DoctorAdmin)

@@ -59,11 +59,11 @@ class Registration(models.Model):
     patient = models.ForeignKey(Patient, verbose_name='患者', on_delete=models.CASCADE, related_name='appointments')
     registration_time = models.DateTimeField(verbose_name='挂号时间')
     period = models.SmallIntegerField(verbose_name='挂号时段', choices=PERIOD_CHOICES)
-    status = models.SmallIntegerField(verbose_name='状态', max_length=10, choices=STATUS_CHOICES)
+    status = models.SmallIntegerField(verbose_name='状态', choices=STATUS_CHOICES)
 
 class MedicalRecord(models.Model):
     '''病历'''
-    symtom = models.CharField(verbose_name='症状', max_length = 200)
+    symptom = models.CharField(verbose_name='症状', max_length = 200)
     diagnosis = models.CharField(verbose_name='诊断结果', max_length = 200)
     solution = models.CharField(verbose_name='治疗方案', max_length = 200)
     registration = models.ForeignKey(Registration, verbose_name='预约信息', on_delete=models.CASCADE)

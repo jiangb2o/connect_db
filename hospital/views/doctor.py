@@ -34,4 +34,5 @@ def medical_record(request, registration_id):
         medical_record = form.save(commit=False)
         medical_record.registration = registration
         medical_record.save()
-        return redirect(f'/doctor/medical_record/{registration_id}', {'form': form})
+
+    return redirect(f'/doctor/medical_record/{registration_id}', {'form': form})

@@ -68,7 +68,7 @@ def registrations(request):
     patient_id = request.session.get('info')['id']
     patient = Patient.objects.get(id=patient_id)
     registrations = Registration.objects.filter(patient=patient)
-    return render(request, 'patient/registraions.html', {'registrations':registrations})
+    return render(request, 'patient/registrations.html', {'registrations':registrations})
 
 def cancel_registration(request, registration_id):
     registration = get_object_or_404(Registration, pk=registration_id)
