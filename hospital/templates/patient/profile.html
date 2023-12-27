@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>医生详情</title>
   <!-- 引入Bootstrap样式 -->
-  <link rel="stylesheet" href="/hospital/static/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
 
-  <link rel="stylesheet" href="/hospital/static/css/patient/registrations.css"/>
+  <link rel="stylesheet" href="/static/css/patient/registrations.css"/>
   <style>
     /* 自定义样式 */
     body {
@@ -88,7 +88,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="department">所属科室: {{ doctor.department }}</label>
+          <label for="department">所属科室: {{ doctor.dept.name }}</label>
         </div>
       </div>
     </div>
