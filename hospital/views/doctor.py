@@ -20,7 +20,7 @@ class MedicalRecordForm(forms.ModelForm):
 def medical_record(request, registration_id):
     if request.method == 'GET':
         form = MedicalRecordForm()
-        return render(request, 'doctor/medical_record.html')
+        return render(request, 'doctor/medical_record.html', {'form': form})
 
     registration = get_object_or_404(Registration, pk=registration_id)
     
@@ -30,10 +30,8 @@ def medical_record(request, registration_id):
         medical_record = None
 
     form = MedicalRecordForm(request.POST, instance=medical_record)
-    
     if form.is_valid():
-        print('form is valid')
         medical_record = form.save(commit=False)
         medical_record.registration = registration
         medical_record.save()
-        return redirect(f'/doctor/medical_record/{registration_id}')
+        return redirect(f'/doctor/medical_record/{registration_id}', {'form': form})
