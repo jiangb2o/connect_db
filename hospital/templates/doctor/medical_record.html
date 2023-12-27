@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>病例详情</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/patient/registrations.css'%}"/>
+
+    <link rel="stylesheet" href="/hospital/static/css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/hospital/static/css/patient/registrations.css"/>
+<style>
+    .btn-primary {
+        background-color: #a5bdd4; /* 与网页背景颜色相同 */
+        border-color: #f8f9fa; /* 与网页背景颜色相同 */
+        margin: 0 auto; /* 设置左右外边距为 auto，使其水平居中 */
+        display: block; /* 让按钮变成块级元素，以使设置左右外边距有效 */
+        color: #333;
+        text-decoration: underline;
+        margin-left: 10px;
+    }
+
+    .btn-primary:hover {
+        background-color: #112434; /* 鼠标悬停时的背景颜色 */
+        border-color: #112434; /* 鼠标悬停时的边框颜色 */
+    }
+    .pagination-container {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+            }
+
+        .pagination {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+      }
+  
+      .step-links {
+          display: flex;
+          align-items: center;
+          white-space: nowrap;
+          line-height: 1;
+      }
+  
+      .step-links a {
+          text-decoration: none;
+          padding: 8px 10px;
+          border: 2px solid #a5bdd4;
+          border-radius: 6px;
+          color: #333;
+          transition: background-color 0.3s;
+          display: inline-block; /* 让链接元素显示为行内块级元素 */
+          margin-right: 5px; /* 调整链接之间的右边距 */
+      }
+  
+      .step-links a:hover {
+          background-color: #a5bdd4;
+          color: #fff;
+      }
+      .current {
+          padding: 8px 12px;
+          background-color: #112434;
+          color: #fff;
+          border: 2px solid #112434;
+          border-radius: 6px;
+          margin: 0 5px;
+      }
+</style>
+
+</head>
+<body>
+    <h1>填写病例</h1>
+    <script>
+        function goBack() {  
+            window.history.back();
+        }
+    </script>
+    <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
+
+    <!-- 添加表单 -->
+      {% csrf_token %}
+      <table>
+        <thead>
+          <tr>
+            <th>患者信息</th>
+            <th>症状</th>
+            <th>诊断结果</th>
+            <th>治疗方案</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ registration_id.patient.name }}</td>
+            <!-- 添加输入框 -->
+            <td><input type="text" name="symptom" value="{{ registration_id.symptom }}"></td>
+            <td><input type="text" name="diagnosis" value="{{ registration_id.diagnosis }}"></td>
+            <td><input type="text" name="solution" value="{{ registration_id.solution }}"></td>
+            <td><button type="submit" class="btn btn-primary">保存</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+  </div>
+    </form>
+</body>
+</html>

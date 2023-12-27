@@ -1,18 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>个人信息</title>
-  <!-- 引入Bootstrap样式 -->
-  <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}"/>
 
   <style>
     /* 自定义样式 */
     body {
       height: 100%;
-      background-color: #a5bdd4; /* 设置白色背景 */
-}
+      background-color: #a5bdd4;
+    }
 
     .patient-info-container {
       padding: 20px;
@@ -20,60 +20,74 @@
       background-color: #f8f9fa;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px; /* 调整padding */
-      max-width: 700px; /* 调整max-width */
-      margin: 80px; /* 使用 auto 将容器居中，并添加顶部和底部的 margin */
+      padding: 20px;
+      max-width: 700px;
+      margin: 80px auto;
     }
 
     /* 示例按钮样式 */
     .btn-primary {
-        background-color: #98b0c6; /* 与网页背景颜色相同 */
-        border-color: #f8f9fa; /* 与网页背景颜色相同 */
-        margin: 0; /* 去除默认的body边距 */
+        background-color: #98b0c6;
+        border-color: #f8f9fa;
         margin-right: 20px;
         color: #f8f9fa;
     }
 
     .btn-primary:hover {
-        background-color: #112434; /* 鼠标悬停时的背景颜色 */
-        border-color: #a5bdd4; /* 鼠标悬停时的边框颜色 */
+        background-color: #112434;
+        border-color: #a5bdd4;
     }
 
+    /* 样式类似于输入框 */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group p {
+      padding: 8px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background-color: #fff;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container mt-5 patient-info-container mx-auto">
-    <h2 class="text-center" >Personal Center</h2>
+  <div class="container mt-5 patient-info-container">
+    <h2 class="text-center">个人中心</h2>
 
     <div class="form-group">
       <label for="name">姓名: </label>
-      <input type="text" class="form-control" value="{{ Patient.name }}" readonly>
+      <p>{{ patient.name }}</p>
     </div>
 
     <div class="form-group">
       <label for="username">用户名:</label>
-      <input type="text" class="form-control" value="{{ Patient.username }}" readonly>
+      <p>{{ patient.username }}</p>
     </div>
 
     <div class="form-group">
       <label for="password">密码:</label>
-      <input type="password" class="form-control" value="{{ Patient.password}}" readonly>
+      <p>{{ patient.password }}</p>
     </div>
-
-    <button class="btn btn-primary" onclick="openChangePasswordModal()">修改密码</button>
 
     <div class="form-group">
       <label for="age">年龄:</label>
-      <input type="text" class="form-control" value="{{ Patient.age }}" readonly>
+      <p>{{ patient.age }}</p>
     </div>
 
     <div class="form-group">
       <label for="gender">性别:</label>
-      <input type="text" class="form-control" value="{{ Patient.gender }}" readonly>
+      <p>{{ patient.get_gender_display }}</p>
     </div>
-
-    <a href="/patient/registrations"  class="btn btn-primary " >查看挂号记录</a>
+    
     <a href="#" class="btn btn-primary" onclick="goBack()">返回</a>
   </div>
   <script>

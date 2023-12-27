@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>医生登录 - 患者预约记录</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/Registration.css">
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/doctor/registrations.css">
 </head>
 
 <body>
@@ -22,8 +22,8 @@
     <div class="menu-container">
         <!-- 菜单栏 -->
         <div class="sidenav"> 
-            <a href="#">首页</a>
-            <a href="#" class="active">患者预约记录</a>         
+            <a href="/doctor/home">首页</a>
+            <a href="/doctor/registrations" class="active">患者预约记录</a>         
         </div>
 
     <div class="container">
@@ -41,11 +41,12 @@
             </thead>
             <tbody>
                 <!-- 示例数据 -->
+                {% for registration in registrations %}
                 <tr>
-                    <td>{{% registration.patient.name %}}</td>
-                    <td>{{% registration.registration_time %}}</td>
-                    <td>{{% registration.period %}}</td>
-                    <td>{{% registration.status %}}</td>
+                    <td>{{ registration.patient.name }}</td>
+                    <td>{{ registration.registration_time|date:"Y年 m月 d日"}}</td>
+                    <td>{{ registration.get_period_display }}</td>
+                    <td>{{ registration.get_status_display }}</td>
                     <td>
                         <div class="action-buttons">
                             <button class="btn btn-able" onclick="acceptAppointment(this)">接诊</button>
@@ -54,6 +55,7 @@
                         </div>
                     </td>
                 </tr>
+                {% endfor %}
                 <!-- 更多患者记录... -->
             </tbody>
         </table>

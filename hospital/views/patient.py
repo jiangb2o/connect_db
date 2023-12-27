@@ -11,7 +11,7 @@ def register(request):
     doctors = Doctor.objects.all()
     departments = Department.objects.all()
 
-
+    # 获取查询值
     name_query = request.GET.get('name', '')
     dept_query = request.GET.get('department', '')
     
@@ -21,8 +21,12 @@ def register(request):
     if dept_query:
         doctors = doctors.filter(dept=dept_query)
 
-    # doctors = [] # 运行时注释此行
-    # 转换为int 在前端进行比较
+    # 分页
+    paginator = Paginator(doctors, 5)
+    page_number = request.GET.get('page')
+    doctors = paginator.get_page(page_number)
+
+    # 转换为int在前端进行比较
     dept_query = int(dept_query, base=10) if dept_query != '' else 0
     
     return render(request, 'patient/register.html', {'doctors': doctors, 'name_query': name_query, 'dept_query': (dept_query), 'departments' : departments})
@@ -74,6 +78,9 @@ def cancel_registration(request, registration_id):
     
     return redirect('/patient/registrations/')
 
+
+
+
 def personnel(request):
     doctors = Doctor.objects.all()
     departments = Department.objects.all()
@@ -86,7 +93,9 @@ def medical_record(request, registration_id):
     return render(request, 'patient/medical_record.html', {'registration_id': registration_id})
 
 def personal(request):
-    return render(request, 'patient/personal.html')
+    patient_id = request.session.get('info')['id']
+    patient = Patient.objects.get(id=patient_id)
+    return render(request, 'patient/personal.html', {'patient': patient})
 
 def mytest(request):
     # patient_list = Patient.objects.all()
