@@ -87,4 +87,4 @@ def enroll(request):
     else:
         form = PatientForm()
     
-    return render(req1uest, "login/enroll.html", {"form": form})
+    return render(request, "login/enroll.html", {"form": form})
