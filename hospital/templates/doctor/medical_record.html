@@ -57,6 +57,8 @@
   </script>
   <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
 
+  
+
   <!-- 在这里添加表单标签 -->
   <form method="post" style="margin-top: 30px;">
     {% csrf_token %}
@@ -69,17 +71,17 @@
         </tr>
         <tr>
           <th style=" width:100px;">症状</th>
-          <td><textarea name="symptom">{{ form.symptom.values }}</textarea></td>
+          <td><textarea name="symptom">{{ form.symptom.value }}</textarea></td>
   
         </tr>
         <tr>
           <th style=" width:100px;">诊断结果</th>
-          <td><textarea name="diagnosis">{{ form.diagnosis.values }}</textarea></td>
+          <td><textarea name="diagnosis">{{ form.diagnosis.value }}</textarea></td>
           
         </tr>
         <tr>
           <th style=" width:100px;">治疗方案</th>
-          <td><textarea name="solution">{{ form.solution.values }}</textarea></td>
+          <td><textarea name="solution">{{ form.solution.value }}</textarea></td>
           
         </tr>
         <tr>

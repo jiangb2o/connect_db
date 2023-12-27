@@ -18,12 +18,18 @@ class MedicalRecordForm(forms.ModelForm):
         exclude = ['registration']
 
 def medical_record(request, registration_id):
+    registration = get_object_or_404(Registration, pk=registration_id)
     if request.method == 'GET':
-        form = MedicalRecordForm()
+        try:
+            medical_record = MedicalRecord.objects.get(registration=registration)
+            form = MedicalRecordForm(instance=medical_record)
+        except MedicalRecord.DoesNotExist:
+            medical_record = None
+            form = MedicalRecord()
+
+        print(form)
         return render(request, 'doctor/medical_record.html', {'form': form})
 
-    registration = get_object_or_404(Registration, pk=registration_id)
-    
     try:
         medical_record = MedicalRecord.objects.get(registration=registration)
     except MedicalRecord.DoesNotExist:
@@ -34,5 +40,4 @@ def medical_record(request, registration_id):
         medical_record = form.save(commit=False)
         medical_record.registration = registration
         medical_record.save()
-
-    return redirect(f'/doctor/medical_record/{registration_id}', {'form': form})
+        return redirect(f'/doctor/medical_record/{registration_id}', {'form': form})
