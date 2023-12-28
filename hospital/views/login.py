@@ -44,7 +44,7 @@ def login(request):
         if user:
             # 验证成功，跳转到主页
             print(user.username)
-            request.session["info"] = {'id': user.id}
+            request.session["info"] = {'id': user.id, 'login_type': login_type}
             if login_type == 'patient_login':
                 return redirect("/patient/home/")
             else:
