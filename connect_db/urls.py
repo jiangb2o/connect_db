@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.views.generic.base import RedirectView
 from hospital.views import patient, doctor, login
 
 urlpatterns = [
+    #path('', RedirectView.as_view(url='/login/', permanent=True), name='index'),
+    # 其他URL模式
     path("admin/", admin.site.urls),
     path("login/", login.login),
     path("enroll/", login.enroll),

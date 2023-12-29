@@ -23,7 +23,7 @@ class Doctor(models.Model):
     username = models.CharField(verbose_name='用户名', max_length = 20, unique=True)
     password = models.CharField(verbose_name='密码', max_length = 20)
     title = models.CharField(verbose_name='职称', max_length = 20)
-    dept = models.ForeignKey(Department, verbose_name='科室', on_delete=models.CASCADE, related_name='doctors')
+    dept = models.ForeignKey(Department, verbose_name='科室', on_delete=models.CASCADE)
     profile = models.CharField(verbose_name='简介', max_length = 200)
 
 
@@ -69,7 +69,7 @@ class Medicine(models.Model):
         (1, '西药'),
     ]
 
-    name = models.CharField(verbose_name='名称', max_length = 30)
+    name = models.CharField(verbose_name='名称', max_length = 100)
     type = models.SmallIntegerField(verbose_name='类型', choices=TYPE_CHOICES)
-    producer = models.CharField(verbose_name='生产厂商', max_length = 30)
+    producer = models.CharField(verbose_name='生产厂商', max_length = 100)
     price = models.DecimalField(verbose_name='价格', max_digits=5, decimal_places=2)

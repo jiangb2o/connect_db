@@ -9,7 +9,7 @@ def home(request):
 def registrations(request):
     doctor_id = request.session.get('info')['id']
     doctor = Doctor.objects.get(id=doctor_id)
-    registrations = Registration.objects.filter(doctor=doctor)
+    registrations = Registration.objects.filter(doctor=doctor).order_by('registration_time', 'period')
 
 
     # 分页
