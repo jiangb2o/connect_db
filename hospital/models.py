@@ -56,9 +56,9 @@ class Registration(models.Model):
 
 class MedicalRecord(models.Model):
     '''病历'''
-    symptom = models.CharField(verbose_name='症状', max_length = 200)
-    diagnosis = models.CharField(verbose_name='诊断结果', max_length = 200)
-    solution = models.CharField(verbose_name='治疗方案', max_length = 200)
+    symptom = models.CharField(verbose_name='症状', max_length = 2000)
+    diagnosis = models.CharField(verbose_name='诊断结果', max_length = 2000)
+    solution = models.CharField(verbose_name='治疗方案', max_length = 2000)
     registration = models.ForeignKey(Registration, verbose_name='预约信息', on_delete=models.CASCADE)
 
 
