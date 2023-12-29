@@ -1,4 +1,4 @@
 /static
 /tools
-*.pyc
+**/__pycache__
 *.rar
