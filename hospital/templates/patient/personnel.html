@@ -39,21 +39,21 @@
             flex-grow: 1; /* 让菜单栏和内容容器平分剩余空间 */
             align-items: flex-start;
         }
-        /* 添加左侧菜单栏样式 */
-        .sidenav {    
-            width: 200px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            bottom: 0; /* 设置菜单栏底部与网页底部对齐 */
-            background-color: #0c1e35;
-            padding-top: 20px;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
-            margin-top: 0px; /* 调整上边距，将菜单栏下移 */
-        }
+    /* 添加左侧菜单栏样式 */
+    .sidenav {    
+        width: 200px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        bottom: 0; /* 设置菜单栏底部与网页底部对齐 */
+        background-color: #0c1e35;
+        padding-top: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        margin-top: 0px; /* 调整上边距，将菜单栏下移 */
+    }
 
-        .sidenav a {
+    .sidenav a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 18px;
@@ -94,9 +94,9 @@
     <div class="menu-container">
         <!-- 菜单栏 -->
         <div class="sidenav">
-            <h4 style="color: #fff; margin: 30px; margin-top: 10px;">患者界面</h4>
+            <h5 style="color: #fff; margin: 30px; margin-top: 10px;">患者界面</h5>
             <a href="/patient/home">首页</a>
-            <a href="/patient/register">预约</a>
+            <a href="/patient/register">预约挂号</a>
             <a  class="active">医生介绍</a>
             <a href="/patient/registrations">挂号记录</a>
             <a href="/patient/personal">个人中心</a>
@@ -109,7 +109,7 @@
             <div>
                 {% for doctor in doctors %}  
                     {% if doctor.dept == depart %}
-                        <p class="doctor-name"><a href="/patient/profile/{{ doctor.id }}" style="color: #366182;">{{ doctor.name }}</a></p>
+                        <span class="doctor-name"><a href="/patient/profile/{{ doctor.id }}" style="color: #366182;">{{ doctor.name }}</a></span>
                     {% endif %}
                 {% endfor %}
             </div>

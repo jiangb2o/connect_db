@@ -8,8 +8,129 @@
     <title>医生界面 - 患者预约记录</title>
 
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'css/doctor/registrations.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/menu.css'%}">
 
+<style>
+    h2 {
+        margin: 20px;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    th {
+        text-align: center;
+        vertical-align: middle; /* 垂直居中 */
+    }
+    .table {
+        table-layout: fixed;
+        vertical-align: middle; /* 垂直居中 */
+        
+    }
+    /* 设置表头的样式 */
+    .table thead {
+        position: sticky;
+        top: 0; /* 保持在顶部 */
+        background-color: #f8f9fa; /* 背景色 */
+        z-index: 1; /* 确保在内容之上 */
+        
+    }
+
+    /* 设置医生姓名、科室、操作列的样式 */
+    .table th {
+        background-color: #f8f9fa; /* 背景色 */
+        position: sticky;
+        top: 0; /* 保持在顶部 */
+        z-index: 2; /* 确保在内容之上 */
+        width: 100px; /* 固定宽度 */
+        text-overflow: ellipsis; /* 显示省略号 */
+        vertical-align: middle; /* 垂直居中 */
+    }
+
+    /* 将表项居中对齐 */
+    .table td {
+        text-align: center;
+        vertical-align: middle; /* 垂直居中 */
+        font-size: 18px;
+    }
+
+    /* 居中预约按钮 */
+    .table button {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .pagination {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .step-links {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        line-height: 1;
+        margin-bottom: 20px;
+    }
+
+    .step-links a {
+        text-decoration: none;
+        padding: 8px 10px;
+        border: 2px solid #a5bdd4;
+        border-radius: 6px;
+        color: #333;
+        transition: background-color 0.3s;
+        display: inline-block; /* 让链接元素显示为行内块级元素 */
+        margin-right: 5px; /* 调整链接之间的右边距 */
+    }
+
+    .step-links a:hover {
+        background-color: #a5bdd4;
+        color: #fff;
+    }
+
+    .current {
+        padding: 8px 12px;
+        background-color: #a5bdd4;
+        color: #fff;
+        border: 2px solid #a5bdd4;
+        border-radius: 6px;
+        margin: 0 5px;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    button {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* 垂直居中对齐 */
+        justify-content: center;
+        padding: 10px;
+        font-size: 20px;
+        cursor: pointer;    
+        margin-right: 10px;   
+    }
+    .btn-able{
+        
+        background-color: #4caf50;
+        color: #fff;
+        margin-right: 10px;
+    }
+    .btn-disable {
+        background-color: #ccc;
+        color: #fff;
+        cursor: not-allowed;       
+    }
+    .btn-able:hover {
+        background-color: #a5bdd4; /* 鼠标悬停时的背景颜色 */
+        border-color: #a5bdd4; /* 鼠标悬停时的边框颜色 */
+        color: #112434;   
+    }
+</style>
 </head>
 
 <body>
@@ -21,7 +142,6 @@
             <a href="/doctor/home">首页</a>
             <a href="#" class="active">患者预约记录</a>  
             <a href="/doctor/medicine">药房</a>
-            <a href="/doctor/personal">个人中心</a>
         </div>
     </div>
 

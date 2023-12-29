@@ -101,16 +101,22 @@
     </div><hr>
   
     <div class="row mt-3" style="text-align: center; " >
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="title"> 职称: </label>
           <p>{{ doctor.title }}</p>         
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="department">所属科室:</label>
           <p>{{ doctor.dept.name }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="department">科室房间号:</label>
+          <p>{{ doctor.dept.room_number }}</p>
         </div>
       </div>
     </div>

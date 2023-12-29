@@ -21,6 +21,7 @@
             <a href="/doctor/home">首页</a>
             <a href="/doctor/registrations">患者预约记录</a>  
             <a href="#"  class="active">药房</a>
+            <a href="/doctor/personal">个人中心</a>
         </div>
     </div>
     
@@ -47,6 +48,7 @@
                 <tr>
                     <th scope="col" >药物名</th>
                     <th scope="col" >类型</th>
+                    <th scope="col" >生产厂商</th>
                     <th scope="col" >价格</th>      
                 </tr>
                 </thead>
@@ -55,6 +57,7 @@
                     <tr>
                         <td>{{ medicine.name }}</td>
                         <td>{{ medicine.get_type_display }}</td>
+                        <td>{{medicine.producer}}</td>
                         <td>{{ medicine.price }}￥</td>
                     </tr>
                     {% endfor %}

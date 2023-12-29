@@ -85,3 +85,8 @@ def medicine(request):
     print(type_query)
     
     return render(request, 'doctor/medicine.html', {'medicines': medicines, 'name_query': name_query, 'type_query': (type_query), 'types' : types})
+
+def personal(request):
+    doctor_id = request.session.get('info')['id']
+    doctor = Doctor.objects.get(id=doctor_id)
+    return render(request, 'doctor/personal.html', {'doctor': doctor})

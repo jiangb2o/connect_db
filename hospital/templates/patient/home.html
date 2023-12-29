@@ -6,130 +6,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>患者界面 - 首页</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css'%}"/>
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
+
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css'%}">
     
     <style>
         body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #a5bdd4;
-        overflow: hidden;
-        }
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #a5bdd4;
+          overflow: hidden;
+      }
 
 
-        .department-name {
-            font-size: 1.2em;
-            background-color: #a5bdd4; /* 设置科室名字背景颜色 */
-            background: linear-gradient(to right, #a5bdd4 14%, transparent 14%);
-            color: #fff; /* 设置科室名字文字颜色 */
-            padding:3px; /* 设置内边距 */
-            margin: 0px; /* 去除默认外边距 */
-            white-space: nowrap; /* 防止科室名字换行 */
-            margin-top: 20px;
-        }
+      .department-name {
+          font-size: 1.2em;
+          background-color: #a5bdd4; /* 设置科室名字背景颜色 */
+          background: linear-gradient(to right, #a5bdd4 14%, transparent 14%);
+          color: #fff; /* 设置科室名字文字颜色 */
+          padding:3px; /* 设置内边距 */
+          margin: 0px; /* 去除默认外边距 */
+          white-space: nowrap; /* 防止科室名字换行 */
+          margin-top: 20px;
+      }
 
-        .doctor-name {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin: 10px;/*可以修改名字之间的间距*/
-            
-        }
+      .doctor-name {
+          font-size: 1.4em;
+          font-weight: bold;
+          margin: 10px;/*可以修改名字之间的间距*/
+          
+      }
 
-        .menu-container {
-            flex-grow: 1; /* 让菜单栏和内容容器平分剩余空间 */
-            align-items: flex-start;
-        }
-        .sidenav {    
-            width: 200px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            bottom:0;
-            background-color: #0c1e35;
-            padding-top: 20px;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
-            margin-top: 0px; /* 调整上边距，将菜单栏下移 */
-        }
+      .menu-container {
+          flex-grow: 1; /* 让菜单栏和内容容器平分剩余空间 */
+          align-items: flex-start;
+      }
+      .sidenav {    
+          width: 200px;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          bottom:0;
+          background-color: #0c1e35;
+          padding-top: 20px;
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+          margin-top: 0px; /* 调整上边距，将菜单栏下移 */
+      }
 
-        .sidenav a {
-            padding: 9px 8px 8.7px 32px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #fff;
-            display: block;
-            margin-left: 10px;
-            margin-bottom: 10px;
+      .sidenav a {
+          padding: 9px 8px 8.7px 32px;
+          text-decoration: none;
+          font-size: 18px;
+          color: #fff;
+          display: block;
+          margin-left: 10px;
+          margin-bottom: 10px;
+
+      }
+      .sidenav a.active {
+          color: #0c1e35;
+          background-color: #fff;
+      }
+      .sidenav a:hover {
+          color: #0c1e35;
+          background-color: #fff;
+      }
+      .container {
+          margin-left: 280px;
+          height: 93vh; /* 设置容器的初始高度为视口的高度 */
+          max-height: 93vh;
+          overflow-y: auto; /* 添加滚动条，只在内容溢出时显示 */
+          max-width: 140vh;
+          position: relative;
+          min-height: 90vh;
+          background-color: #fff; /* 白色容器背景 */
+          border-radius: 8px; /* 圆角边框 */
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+          flex-grow: 1;
+          margin-right: 70px; 
+          margin-top: 23px;
         }
-        .sidenav a.active {
-            color: #0c1e35;
-            background-color: #fff;
-        }
-        .sidenav a:hover {
-            color: #0c1e35;
-            background-color: #fff;
-        }
-        .container {
-            margin-left: 280px;
-            height: 93vh; /* 设置容器的初始高度为视口的高度 */
-            max-height: 93vh;
-            overflow-y: auto; /* 添加滚动条，只在内容溢出时显示 */
-            max-width: 140vh;
-            position: relative;
-            min-height: 90vh;
-            background-color: #fff; /* 白色容器背景 */
-            border-radius: 8px; /* 圆角边框 */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-            flex-grow: 1;
-            margin-right: 70px; 
-            margin-top: 23px;
-            }
 
         
-        .hospital-info {
-            margin: 0 auto;
-            margin-top: 8px;
-            padding: 20px;
-            padding-top: 0px;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .hospital-info h2 {
-            color: #333;
-        }
-
-        .hospital-info p {
-            color: #666;
-        }
-
-        .contact-info {
-            margin-top: 15px;
-        }
-
-        .contact-info h4 {
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .contact-info p {
-            color: #666;
-        }
-    </style>
-</head>
+      .hospital-info {
+          margin: 0 auto;
+          margin-top: 8px;
+          padding: 20px;
+          padding-top: 0px;
+          background-color: #f8f8f8;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+      }
+  
+      .hospital-info h2 {
+          color: #333;
+      }
+  
+      .hospital-info p {
+          color: #666;
+      }
+  
+      .contact-info {
+          margin-top: 15px;
+      }
+  
+      .contact-info h4 {
+          color: #333;
+          margin-bottom: 8px;
+      }
+  
+      .contact-info p {
+          color: #666;
+      }
+      </style>
+    </head>
 
 <body>
     <!-- 菜单栏和页面内容容器 -->
     <div class="menu-container">
         <!-- 菜单栏 -->
         <div class="sidenav" style="bottom: 0;">
-            <h5 style="color: #fff; margin: 30px; margin-top: 10.6px; font-size: 1.449em; letter-spacing: -0.2px;">患者界面</h5>
+          <h5 style="color: #fff; margin: 30px; margin-top: 10.6px; font-size: 1.449em; letter-spacing: -0.2px;">患者界面</h5>
             <a href="/patient/home" class="active">首页</a>
-            <a href="/patient/register" >预约</a>
+            <a href="/patient/register" >预约挂号</a>
             <a href="/patient/personnel">医生介绍</a>
             <a href="/patient/registrations">挂号记录</a>
             <a href="/patient/personal" style="padding-top: 8px;">个人中心</a>
@@ -138,17 +139,17 @@
 <div class="container">
 <!-- 医院简介 -->
 <div class="hospital-info" >
-    <h2>医院简介</h2>
-    <p>我院拥有心血管内科、心血管外科、内分泌科、临床护理、呼吸内科、神经内科、眼科、肾病科、感染科、急诊科、医学影像科等国家临床重点专科建设项目11个，
-        广东省临床重点学科18个，院士工作站5个，国家级培训中心17个，广东省质控、诊疗与研究中心42个。</p>
-        <p>拥有高级职称专家720人，国管、省管专家62人，博士硕士导师142人，
-        广东省学术技术带头人32人，国家级学术团体常委以上79人，广东省医学会专业分会主委、副主委116人。先后荣获国家自然科学基金等项目53项，省部级科研项目397项，
-        获广东省科技进步一等奖2项。发表学术论文 3856 篇，其中SCI文章近300篇，中华核心400余篇。</p>
-        <p>医院秉承“仁爱 博学 严谨 卓越”的医院精神，坚持“人民医院服务人民”的宗旨，始终服务在人民群众生命健康的前线。
-        先后被评为全国百姓放心示范医院、全国卫生系统先进集体、全国医院文化建设先进单位、等荣誉称号。连续三届蝉联全国文明单位,
-        连续8年荣获行风评议先进单位，被评为“人民群众满意医院”。</p>
-    
-    </p><hr>
+  <h2>医院简介</h2>
+  <p>我院拥有心血管内科、心血管外科、内分泌科、临床护理、呼吸内科、神经内科、眼科、肾病科、感染科、急诊科、医学影像科等国家临床重点专科建设项目11个，
+    广东省临床重点学科18个，院士工作站5个，国家级培训中心17个，广东省质控、诊疗与研究中心42个。</p>
+    <p>拥有高级职称专家720人，国管、省管专家62人，博士硕士导师142人，
+    广东省学术技术带头人32人，国家级学术团体常委以上79人，广东省医学会专业分会主委、副主委116人。先后荣获国家自然科学基金等项目53项，省部级科研项目397项，
+    获广东省科技进步一等奖2项。发表学术论文 3856 篇，其中SCI文章近300篇，中华核心400余篇。</p>
+    <p>医院秉承“仁爱 博学 严谨 卓越”的医院精神，坚持“人民医院服务人民”的宗旨，始终服务在人民群众生命健康的前线。
+    先后被评为全国百姓放心示范医院、全国卫生系统先进集体、全国医院文化建设先进单位、等荣誉称号。连续三届蝉联全国文明单位,
+    连续8年荣获行风评议先进单位，被评为“人民群众满意医院”。</p>
+ 
+  </p><hr>
 
     <div class="over_3">
         <h3 class="heading left-align">我们的服务</h3>
@@ -159,67 +160,64 @@
                         <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
                             健康体检
                         </a>
-                        <p>
-                            健康医学部2005年成立，于2012年9月17日搬入新门诊大楼9-11层，总面积达5400平方米。
-                            配有专用通道、直达电梯，体检区域与门诊患者分开，
-                            避免交叉感染。宽敞、明亮、整洁、现代化的体检大厅充分改善了体检者的受检环境。
-                            医院聚集了大批临床经验丰富、专业知识渊博，工作严谨的医学人才。
-                            在完成日常诊治的同时，轮流参加健康体检工作，为受检者提供高品质的体检服务
-                        </p>
+                        <p>健康医学部2005年成立，于2012年9月17日搬入新门诊大楼9-11层，总面积达5400平方米。
+                          配有专用通道、直达电梯，体检区域与门诊患者分开，
+                          避免交叉感染。宽敞、明亮、整洁、现代化的体检大厅充分改善了体检者的受检环境。
+                          医院聚集了大批临床经验丰富、专业知识渊博，工作严谨的医学人才。
+                          在完成日常诊治的同时，轮流参加健康体检工作，为受检者提供高品质的体检服务</p>
                     </dd>
                 </dl>
             </div>
             <div class="over_3a f_r bounceInRight col-md-6 clearfix">
-                <dl class="service-item">               
-                    <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
-                        远程医疗
-                    </a>
-                    <p>无论您身在何处，我们的远程医疗服务将为您提供方便快捷的医疗咨询和治疗选择。
+              <dl class="service-item">               
+                <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
+                          远程医疗
+                      </a>
+                      <p>无论您身在何处，我们的远程医疗服务将为您提供方便快捷的医疗咨询和治疗选择。
                         您可以在家中与专业医生进行实时在线咨询，获取医学建议，甚至进行远程诊断。
                         我们的远程医疗团队由经验丰富的医生和护理人员组成，他们将倾听您的症状，提供专业的医学建议，并协助您进行治疗计划。
-                        无论是常规的健康咨询、慢性病管理，还是急性病症的诊疗都能够满足您的需求。
-                    </p>
-                    </dd>
-                </dl>
-            </div>  
-            <div class="bak_7 clearfix">
-            <div class="over_3a f_l bounceInLeft col-md-6 clearfix">
-                <dl class="service-item">
-                    <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
-                            特色专科
-                        </a>
-                        <p>院区紧紧围绕妇科内分泌与生殖中心、整形美容外科、乳腺外科、口腔科四大特色专科及肿瘤内科、南院国际医疗部，
-                            按照“人性化、国际化、市场化”的发展方向，努力打造全生命周期的一站式健康管理模式。</p>
-                    </dd>
-                </dl>
-            </div>
+                        无论是常规的健康咨询、慢性病管理，还是急性病症的诊疗都能够满足您的需求。</p>
+                      
+                  </dd>
+              </dl>
+          </div>        
+        <div class="bak_7 clearfix">
+          <div class="over_3a f_l bounceInLeft col-md-6 clearfix">
+              <dl class="service-item">
+                <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
+                          特色专科
+                      </a>
+                      <p>院区紧紧围绕妇科内分泌与生殖中心、整形美容外科、乳腺外科、口腔科四大特色专科及肿瘤内科、南院国际医疗部，
+                        按照“人性化、国际化、市场化”的发展方向，努力打造全生命周期的一站式健康管理模式。</p>
+                  </dd>
+              </dl>
+          </div>
 
-            <div class="over_3a f_r bounceInRight col-md-6 clearfix">
-                <dl class="service-item">               
-                    <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
+          <div class="over_3a f_r bounceInRight col-md-6 clearfix">
+            <dl class="service-item">               
+              <a  class="font-weight-bold" style="color: rgb(80, 163, 186) ;">
                         专科专病
                     </a>
                     <p>我院专门开设了疑难病会诊中心，用来解决病情复杂、诊断困难的医学难题，为患者提供更深入、更专业的医学建议。
-                        包括但不限于胰腺疾病疑难病会诊、胸部疾病疑难病会诊、炎性肠病疑难病会诊、垂体疾病疑难病会诊等。
+                      包括但不限于胰腺疾病疑难病会诊、胸部疾病疑难病会诊、炎性肠病疑难病会诊、垂体疾病疑难病会诊等。
                     </p>
                 </dd>
             </dl>
         </div>
     </div>
-    </div>
-    </div><hr>
-
-    <!-- 医院地址、邮箱、联系方式等信息 -->
-    <div class="contact-info">
+      </div>
+        </div><hr>
+          <!-- 医院地址、邮箱、联系方式等信息 -->
+  <div class="contact-info">
     <h4>联系我们：</h4>
 
         <p style="margin-left:19px ;"> 地址：广州市番禺区大学城至善医院</p>            
-        <p style="margin-left:19px ;"> Emall：info@example.com</p>
+        <p style="margin-left:19px ;"> E-mail：info@example.com</p>
         <p style="margin-left:19px ;">电话总机：020-12345678</p>
     </div>
 </div>
     </div>   
-    </div>
+      </div>
     </div>  
 
 </body>

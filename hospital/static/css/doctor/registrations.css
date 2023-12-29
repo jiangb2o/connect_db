@@ -1,130 +1,196 @@
 body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     background-color: #a5bdd4;
-    color: #333; /* 黑色文字 */
-    font-family: 'Arial', sans-serif; /* 字体样式 */
-    padding: 20px;
     overflow: hidden;
 }
-h2 {
-    text-align: center;
-    color: #112434;
-    padding-top: 20px;
-    margin-bottom: 20px;
-}
-
-.container {
-    position: relative;
-    min-height: 80vh;
-    background-color: #fff; /* 白色容器背景 */
-    border-radius: 8px; /* 圆角边框 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-    flex-grow: 1;
-    margin-right: 30px; /* 将 margin-right 移动到这里 */
-    margin-top: 34px;
-    margin-left: 250px;
-}
 
 
-.action-buttons {
-    display: flex;
-    justify-content: space-around;
+.department-name {
+    font-size: 1.2em;
+    background-color: #a5bdd4; /* 设置科室名字背景颜色 */
+    background: linear-gradient(to right, #a5bdd4 14%, transparent 14%);
+    color: #fff; /* 设置科室名字文字颜色 */
+    padding:3px; /* 设置内边距 */
+    margin: 0px; /* 去除默认外边距 */
+    white-space: nowrap; /* 防止科室名字换行 */
     margin-top: 20px;
 }
 
-button {
-    display: flex;
-    flex-direction: row;
-    align-items: center; /* 水平居中对齐 */
-    justify-content: center;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 10px;
+.doctor-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px;/*可以修改名字之间的间距*/
+    
 }
-.btn-able{
-    background-color: #4caf50;
-    color: #fff;
+
+.menu-container {
+    flex-grow: 1; /* 让菜单栏和内容容器平分剩余空间 */
+    align-items: flex-start;
 }
-.btn-disable {
-    background-color: #ccc;
-    color: #fff;
-    cursor: not-allowed;
-}
-.btn-able:hover {
-    background-color: #a5bdd4; /* 鼠标悬停时的背景颜色 */
-    border-color: #a5bdd4; /* 鼠标悬停时的边框颜色 */
-    color: #112434;
-}
-        /* 添加左侧菜单栏样式 */
-.sidenav {
-    height: 100%;
+/* 添加左侧菜单栏样式 */
+.sidenav {    
     width: 200px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
+    bottom: 0;
     background-color: #0c1e35;
     padding-top: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
-    margin-top: 80px; /* 调整上边距，将菜单栏下移 */
+    margin-top: 0px; /* 调整上边距，将菜单栏下移 */
 }
 
 .sidenav a {
     padding: 8px 8px 8px 32px;
-    text-decoration: none;
+
     font-size: 18px;
     color: #fff;
     display: block;
-}
+    margin-left: 10px;
+    margin-bottom: 10px;
 
-.sidenav a:hover {
-    color: #0c1e35;
-    background-color: #fff;
 }
 .sidenav a.active {
-    background: #fff;
-    color: #112434;
+color: #0c1e35;
+background-color: #fff;
+}
+.sidenav a:hover {
+color: #0c1e35;
+background-color: #fff;
+}
+.container {
+    margin-left: 280px;
+    height: 93vh; /* 设置容器的初始高度为视口的高度 */
+    max-height: 93vh;
+    overflow-y: auto; /* 添加滚动条，只在内容溢出时显示 */
+    max-width: 140vh;
+    position: relative;
+    min-height: 90vh;
+    background-color: #fff; /* 白色容器背景 */
+    border-radius: 8px; /* 圆角边框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    flex-grow: 1;
+    margin-right: 70px; 
+}
+h2 {
+    margin: 20px;
+    text-align: center;
+    margin-bottom: 0px;
 }
 th {
     text-align: center;
-
+    vertical-align: middle; /* 垂直居中 */
 }
-.navigation {
-    display: flex ;
-    justify-content: right ;
-    align-items: center;
-    margin-right: 30px ;
-    margin-top: -30px; 
-}
-  
-  .navigation li {
-    list-style: none;
-    margin-left: 20px;
+.table {
+    table-layout: fixed;
+    vertical-align: middle; /* 垂直居中 */
     
-  }
-  
-  .navigation li a {
+}
+/* 设置表头的样式 */
+.table thead {
+    position: sticky;
+    top: 0; /* 保持在顶部 */
+    background-color: #f8f9fa; /* 背景色 */
+    z-index: 1; /* 确保在内容之上 */
+    
+}
+
+/* 设置医生姓名、科室、操作列的样式 */
+.table th {
+    background-color: #f8f9fa; /* 背景色 */
+    position: sticky;
+    top: 0; /* 保持在顶部 */
+    z-index: 2; /* 确保在内容之上 */
+    width: 100px; /* 固定宽度 */
+    text-overflow: ellipsis; /* 显示省略号 */
+    vertical-align: middle; /* 垂直居中 */
+}
+
+/* 将表项居中对齐 */
+.table td {
+    text-align: center;
+    vertical-align: middle; /* 垂直居中 */
+    font-size: 18px;
+}
+
+/* 居中预约按钮 */
+.table button {
+    margin: 0 auto;
+    display: block;
+}
+
+.pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.step-links {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.step-links a {
     text-decoration: none;
-    padding: 6px 15px;
-    color: #112434;
-    border: 1px solid #112434; /* 添加边框颜色 */
-    border-radius: 20px;
-    font-size: clamp(0.9rem, 6vw, 1rem);
-  }
-  
+    padding: 8px 10px;
+    border: 2px solid #a5bdd4;
+    border-radius: 6px;
+    color: #333;
+    transition: background-color 0.3s;
+    display: inline-block; /* 让链接元素显示为行内块级元素 */
+    margin-right: 5px; /* 调整链接之间的右边距 */
+}
 
-  .navigation li a.active {
-    background: #112434;
+.step-links a:hover {
+    background-color: #a5bdd4;
     color: #fff;
-  } 
-   .navigation li a:hover {
-    background: #112434;
-    color: #fff;
-  }
+}
 
-h5 {
-    font-family: 'Arial', sans-serif;
-    color: #f0f0f0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    text-align: left;
+.current {
+    padding: 8px 12px;
+    background-color: #a5bdd4;
+    color: #fff;
+    border: 2px solid #a5bdd4;
+    border-radius: 6px;
+    margin: 0 5px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+button {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: center;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;    
+    margin-right: 10px;   
+}
+.btn-able{
+    
+    background-color: #4caf50;
+    color: #fff;
+    margin-right: 10px;
+}
+.btn-disable {
+    background-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;       
+}
+.btn-able:hover {
+    background-color: #a5bdd4; /* 鼠标悬停时的背景颜色 */
+    border-color: #a5bdd4; /* 鼠标悬停时的边框颜色 */
+    color: #112434;   
 }

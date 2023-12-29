@@ -82,10 +82,7 @@ z-index: 1; /* 确保在内容之上 */
 
 }
 
-/* 设置医生姓名、科室、操作列的样式 */
-.table th:first-child,
-.table th:nth-child(2),
-.table th:last-child {
+.table th {
 background-color: #f8f9fa; /* 背景色 */
 position: sticky;
 top: 0; /* 保持在顶部 */

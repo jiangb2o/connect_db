@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>医生界面 - 个人中心</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}"/>
+  <style>
+    /* 自定义样式 */
+    body {
+      height: 100%;
+      background-color: #a5bdd4;
+    }
+
+    .doctor-info-container {
+      padding: 20px;
+      margin: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 700px;
+      margin: 80px auto;
+    }
+
+    /* 示例按钮样式 */
+    .btn-primary {
+        background-color: #98b0c6;
+        border-color: #f8f9fa;
+        margin-right: 20px;
+        color: #f8f9fa;
+    }
+
+    .btn-primary:hover {
+        background-color: #112434;
+        border-color: #a5bdd4;
+    }
+
+    /* 样式类似于输入框 */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group p {
+      padding: 8px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background-color: #fff;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5 doctor-info-container">
+    <h2 class="text-center">个人中心</h2>
+
+    <div class="form-group">
+      <label for="name">姓名: </label>
+      <p>{{ doctor.name }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="username">用户名:</label>
+      <p>{{ doctor.username }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="password">密码:</label>
+      <p>{{ doctor.password }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="title">职称:</label>
+      <p>{{ doctor.title }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="dept">所属科室:</label>
+      <p>{{ doctor.dept.name }}</p>
+    </div>
+    
+    <a href="#" class="btn btn-primary" onclick="goBack()">返回</a>
+    <a href="/logout" class="btn btn-warning">注销</a>
+  </div>
+  <script>
+        // JavaScript 函数，用于返回上一页
+        function goBack() {
+            window.history.back();
+        }
+  </script>
+</body>
+</html>

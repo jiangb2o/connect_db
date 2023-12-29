@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from hospital.models import Patient, Doctor, Registration, Department
+from hospital.models import *
 from datetime import datetime
 from django.core.paginator import Paginator
 
@@ -95,7 +95,9 @@ def profile(request, doctor_id):
     return render(request, 'patient/profile.html', {'doctor': doctor})
 
 def medical_record(request, registration_id):
-    return render(request, 'patient/medical_record.html', {'registration_id': registration_id})
+    registration = get_object_or_404(Registration, pk=registration_id)
+    medical_record = MedicalRecord.objects.get(registration=registration)
+    return render(request, 'patient/medical_record.html', {'medical_record': medical_record})
 
 def personal(request):
     patient_id = request.session.get('info')['id']

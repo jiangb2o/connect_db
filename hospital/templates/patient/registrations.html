@@ -1,74 +1,99 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>挂号记录</title>
-  
-  <link rel="stylesheet" href="{% static 'css/patient/registrations.css'%}"/>
 
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>患者界面 - 挂号记录</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'css/doctor/registrations.css'%}">
+        <link rel="stylesheet" href="{% static 'css/patient/registrations.css'%}">
+        <link rel="stylesheet" href="/hospital/static/css/bootstrap/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/hospital/static/css/doctor/registrations.css"/>
+        <link rel="stylesheet" href="/hospital/static/css/patient/registrations.css"/>
+    </head>
 
 <body>
-  <h1>挂号记录</h1>
-    <script>
-        // JavaScript 函数，用于返回上一页
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-  <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
-  <!-- 患者挂号记录表格 -->
-  <table>
-    <thead>
-      <tr>
-        <th>医生姓名</th>
-        <th>挂号时间</th>
-        <th>挂号时段</th>
-        <th>状态</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for registration in registrations %}
-      <tr>
-        <td>{{ registration.doctor.name }}</td>
-        <td>{{ registration.registration_time|date:"Y年m月d日" }}</td>
-        <td>{{ registration.get_period_display }}</td>
-        <td>{{ registration.get_status_display }}</td>
-        {% if registration.status == 0 %}
-        <td><a href="/patient/cancel_registration/{{ registration.id }}" style=" text-decoration: underline;">取消预约</a></td>
-        {% endif %}
-        {% if registration.status == 1 %}
-        <td>预约已取消</td>
-        {% endif %}
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <div class="pagination">
-    <span class="step-links">
-        {% if registrations.has_previous %}
-            <a href="?page=1">&laquo; 首页</a>
-            <a href="?page={{ registrations.previous_page_number }}">上一页</a>
-        {% else %}
-        <a>&laquo; 首页</a>
-        <a>上一页</a>
-        {% endif %}
+    <!-- 菜单栏和页面内容容器 -->
+    <div class="menu-container">
+        <!-- 菜单栏 -->
+        <div class="sidenav" >
+            <h5 style="color: #fff; margin: 30px; margin-top: 10px;">患者界面</h5>
+            <a href="/patient/home">首页</a>
+            <a href="/patient/register">预约</a>
+            <a  href="/patient/personnel">医生介绍</a>
+            <a class="active">挂号记录</a>
+            <a href="/patient/personal">个人中心</a>
+        </div>
+        
+        <div class="container" style="margin-top: 23px;">
+            <table>
+                <thead>
+                  <tr>
+                    <th>医生姓名</th>
+                    <th>挂号时间</th>
+                    <th>挂号时段</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                    <th>诊断结果</th>
+                  </tr>
+                </thead>
+                    <tbody>
+                    {% for registration in registrations %}
+                        <tr>
+                            <td>{{ registration.doctor.name }}</td>
+                            <td>{{ registration.registration_time|date:"Y年m月d日" }}</td>
+                            <td>{{ registration.get_period_display }}</td>
+                            <td>{{ registration.get_status_display }}</td>
 
-        <span class="current">
-            第 {{ registrations.number }} / {{ registrations.paginator.num_pages }} 页
-        </span>
+                            {% if registration.status == 0 %}
+                            <td><a href="/patient/cancel_registration/{{ registration.id }}" style=" text-decoration: underline;">取消预约</a></td>
+                            {% elif registration.status == 1 %}
+                            <td>预约已取消</td>
+                            {% else %}
+                            <td></td>
+                            {% endif %}
+                            
 
-        {% if registrations.has_next %}
-            <a href="?page={{ registrations.next_page_number }}">下一页</a>
-            <a href="?page={{ registrations.paginator.num_pages }}">尾页 &raquo;</a>
-        {% else %}
-        <a>下一页</a>
-        <a>尾页 &raquo;</a>                    
-        {% endif %}
-    </span>
-</div>
+                            {% if registration.status == 3 %}
+                            <td><a href="/patient/medical_record/{{ registration.id }}" style=" text-decoration: underline;">查看详情</a></td>
+                            {% else %}
+                            <td></td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+                </tbody>
+              </table>
+            
+            <div class="pagination">
+                <span class="step-links">
+                    {% if registrations.has_previous %}
+                        <a href="?page=1">&laquo; 首页</a>
+                        <a href="?page={{ registrations.previous_page_number }}">上一页</a>
+                    {% else %}
+                    <span class="step">
+                    <a>&laquo; 首页</a>
+                    <a>上一页</a></span>
+                    {% endif %}
+            
+                    <span class="current">
+                        第 {{ registrations.number }} / {{ registrations.paginator.num_pages }} 页
+                    </span>
+            
+                    {% if registrations.has_next %}
+                        <a href="?page={{ registrations.next_page_number }}">下一页</a>
+                        <a href="?page={{ registrations.paginator.num_pages }}">尾页 &raquo;</a>
+                    {% else %}
+                    <span class="step">
+                    <a>下一页</a>
+                    <a>尾页 &raquo;</a></span>                 
+                    {% endif %}
+                </span>
+            </div>
+        </body>       
+    </div>
+    </div>  
 </body>
 </html>

@@ -1,0 +1,99 @@
+body {
+    background-color: aliceblue;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #112434;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    padding: 14px; /* 增加内边距 */
+  }
+
+  th {
+    background-color: #112434;
+    color: #fff;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  a {
+    text-decoration: none;
+    color: #112434;
+  }
+
+  a:hover {
+    color: #fff;
+    background-color: #112434;
+  }
+
+  .return-link {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    margin-right: 40px;
+    margin-top: 20px;
+    text-decoration: underline;
+    font-size: 1.2em; /* 调整字体大小 */
+  }
+  .pagination-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.pagination {
+position: absolute;
+bottom: 10px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.step-links {
+display: flex;
+align-items: center;
+white-space: nowrap;
+line-height: 1;
+margin-bottom: 20px;
+}
+
+.step-links a {
+text-decoration: none;
+padding: 8px 10px;
+border: 2px solid #112434;
+border-radius: 6px;
+color: #333;
+transition: background-color 0.3s;
+display: inline-block; /* 让链接元素显示为行内块级元素 */
+margin-right: 5px; /* 调整链接之间的右边距 */
+}
+
+.step-links a:hover {
+background-color: #112434;
+color: #fff;
+}
+
+.current {
+padding: 8px 12px;
+background-color: #112434;
+color: #fff;
+border: 2px solid #112434;
+border-radius: 6px;
+margin: 0 5px;
+}
