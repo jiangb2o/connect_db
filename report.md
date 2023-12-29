@@ -1,34 +1,4 @@
-### 环境  
-openGauss 5.1.0  
-Django 3.0.0  
-
-```bash
-pip install Django==3.0.0
-```
-将`connect_db`中`setting.py`的`DATABASE`修改  
-```py
-DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_project', #数据库名
-        'USER': 'admin', #用户名
-        'PASSWORD': 'Gauss@123', #密码
-        'HOST': '192.168.56.109',#虚拟机ip
-        'PORT': 26000 #openGauss数据口的端口
-    }
-}
-```
-执行以下命令运行服务器  
-```
-# 生成迁移文件
-python manage.py makemigrations
-# 执行sql语句生成数据表
-python manage.py migrate
-# 运行服务器
-python manage.py runserver
-```
-
+### OpenGauss数据库配置  
 
 
 ### 功能演示  
@@ -65,5 +35,3 @@ python manage.py runserver
 * ##### 个人中心:  
 * - 可以看到医生的个人信息, 可进行账号注销操作:  
 ![](img/doctor/doctor_personal.jpg)  
-
-
