@@ -60,3 +60,28 @@ def finish(request, registration_id):
     registration.status = 3
     registration.save()
     return redirect('/doctor/registrations')
+
+def medicine(request):
+    medicines = Medicine.objects.all()
+    types = Medicine.TYPE_CHOICES
+
+    # 获取查询值
+    name_query = request.GET.get('name', '')
+    type_query = request.GET.get('type', '')
+    
+    if name_query:
+        medicines = medicines.filter(name__contains=name_query)
+    
+    if type_query:
+        medicines = medicines.filter(type=type_query)
+    
+    # 分页
+    paginator = Paginator(medicines, 10)
+    page_number = request.GET.get('page')
+    medicines = paginator.get_page(page_number)
+
+    # 转换为int在前端进行比较
+    type_query = int(type_query, base=10) if type_query != '' else type_query
+    print(type_query)
+    
+    return render(request, 'doctor/medicine.html', {'medicines': medicines, 'name_query': name_query, 'type_query': (type_query), 'types' : types})

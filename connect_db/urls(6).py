@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from hospital.views import patient, doctor, login
+from hospital_site.views import patient, doctor, login
 
 urlpatterns = [
     path("admin/", admin.site.urls),

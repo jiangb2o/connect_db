@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Registration</title>
-    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
     <style>
         body {
             margin: 0;
             padding: 0;
-            height: 75vh;
+            height: 68vh;
             background:  url('/static/img/login.jpg');
             background-size: cover;
             color: #333;
@@ -42,33 +42,41 @@
         }
 
         .btn-primary {
-                background-color: aliceblue; /* 与网页背景颜色相同 */
-                border-color: #f8f9fa; /* 与网页背景颜色相同 */
-                margin: 0; /* 去除默认的body边距 */
-                margin-right: 20px;
-                color: #333;
-                text-decoration: underline;
+            background-color: aliceblue; /* 与网页背景颜色相同 */
+            border-color: #f8f9fa; /* 与网页背景颜色相同 */
+            margin: 0; /* 去除默认的body边距 */
+            margin-right: 20px;
+            color: #333;
+            text-decoration: underline;
             }
     
         .btn-primary:hover {
             background-color: #112434; /* 鼠标悬停时的背景颜色 */
             border-color: #112434; /* 鼠标悬停时的边框颜色 */
         }
-    
+        
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
     </style>
     </head>
 
 <body>
     
-            <form class="form-container" action=" " method="post" novalidate>
+    <form class="form-container" action=" " method="post" novalidate>
         <fieldset>
             <!-- Header -->
             <div class="container" >
                 <div class="col-md-12 text-center" style="background-color: #a5bdd4; padding: 20px;">
                     <div class="col-md-12 text-center">
-                        <h2>Patient Registration</h2>
+                        <h2>患者注册</h2>
                     </div>
-                    <legend style="color: #fff; ">Fill your message!</legend>                
+                    <legend style="color: #fff; ">填写您的信息！</legend>                
                 </div>
             </div>
 
@@ -93,17 +101,18 @@
             <div class="btn-container" style="background-color: #a5bdd4; padding: 20px;">
                 <div class="row">
                     <div class="col-md-8 text-center">
-                        <button type="submit" class="btn btn-warning">Register <span class="glyphicon glyphicon-send"></span></button>                
-                        <a href="#" class="btn btn-primary" onclick="goBack()">返回</a>
+                        <button type="submit" class="btn btn-warning"> 注册 <span class="glyphicon glyphicon-send"></span></button>                
+                        <a href="/login" class="btn btn-primary">返回</a>
                 </div>
             </div>
         </fieldset>
     </form>
+
     <script>
         // JavaScript 函数，用于返回上一页
         function goBack() {
             window.history.back();
         }
-  </script>
+    </script>
 </body>
 </html>

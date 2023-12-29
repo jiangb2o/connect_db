@@ -39,7 +39,6 @@ def login(request):
         print(login_type)
         user_model = Patient if login_type == 'patient_login' else Doctor
         user = user_model.objects.filter(**form.cleaned_data).first()
-        #user = 0
 
         if user:
             # 验证成功，跳转到主页
@@ -88,3 +87,7 @@ def enroll(request):
         form = PatientForm()
     
     return render(request, "login/enroll.html", {"form": form})
+
+def logout(request):
+    request.session.clear()
+    return redirect('/login/')

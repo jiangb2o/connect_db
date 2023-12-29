@@ -16,7 +16,7 @@ def register(request):
     dept_query = request.GET.get('department', '')
     
     if name_query:
-        doctors = doctors.filter(name=name_query)
+        doctors = doctors.filter(name__contains=name_query)
     
     if dept_query:
         doctors = doctors.filter(dept=dept_query)
@@ -27,7 +27,7 @@ def register(request):
     doctors = paginator.get_page(page_number)
 
     # 转换为int在前端进行比较
-    dept_query = int(dept_query, base=10) if dept_query != '' else 0
+    dept_query = int(dept_query, base=10) if dept_query != '' else dept_query
     
     return render(request, 'patient/register.html', {'doctors': doctors, 'name_query': name_query, 'dept_query': (dept_query), 'departments' : departments})
     

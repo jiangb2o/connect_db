@@ -1,5 +1,7 @@
 body {
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 .form-container {
   position: relative;
@@ -138,4 +140,9 @@ border-color: #888;
 .error {
   color: #dc3545;
   font-size: 80%;
+}
+.img-box img {
+  max-width: 100%; /* 设置图片的最大宽度为父元素的宽度 */
+  height: auto; /* 保持图片的纵横比 */
+  margin-top: 100px;
 }

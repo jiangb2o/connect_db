@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #a5bdd4;
+    overflow: hidden;
+}
+
+
+.department-name {
+    font-size: 1.2em;
+    background-color: #a5bdd4; /* 设置科室名字背景颜色 */
+    background: linear-gradient(to right, #a5bdd4 14%, transparent 14%);
+    color: #fff; /* 设置科室名字文字颜色 */
+    padding:3px; /* 设置内边距 */
+    margin: 0px; /* 去除默认外边距 */
+    white-space: nowrap; /* 防止科室名字换行 */
+    margin-top: 20px;
+}
+
+.doctor-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px;/*可以修改名字之间的间距*/
+    
+}
+
+.menu-container {
+    flex-grow: 1; /* 让菜单栏和内容容器平分剩余空间 */
+    align-items: flex-start;
+}
+/* 添加左侧菜单栏样式 */
+.sidenav {    
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #0c1e35;
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    margin-top: 0px; /* 调整上边距，将菜单栏下移 */
+}
+
+.sidenav a {
+padding: 8px 8px 8px 32px;
+
+font-size: 19px;
+color: #fff;
+display: block;
+margin-left: 10px;
+margin-bottom: 10px;
+
+}
+.sidenav a.active {
+color: #0c1e35;
+background-color: #fff;
+}
+.sidenav a:hover {
+color: #0c1e35;
+background-color: #fff;
+}
+.container {
+margin-left: 280px;
+    height: 93vh; /* 设置容器的初始高度为视口的高度 */
+    max-height: 93vh;
+    overflow-y: auto; /* 添加滚动条，只在内容溢出时显示 */
+    max-width: 140vh;
+position: relative;
+min-height: 90vh;
+background-color: #fff; /* 白色容器背景 */
+border-radius: 8px; /* 圆角边框 */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+flex-grow: 1;
+margin-right: 70px; 
+}

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>医生界面 - 药房</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css'%}"/>
+        <link rel="stylesheet" href="{% static 'css/doctor/medicine.css'%}">
+
+    </head>
+
+<body>
+    <!-- 菜单栏和页面内容容器 -->
+    <div class="menu-container">
+        <!-- 菜单栏 -->
+        <div class="sidenav" style="bottom:0;">
+            <h5 style="color: #fff; margin: 30px; margin-top: 10px;">医生界面</h5>
+            <a href="/doctor/home">首页</a>
+            <a href="/doctor/registrations">患者预约记录</a>  
+            <a href="#"  class="active">药房</a>
+        </div>
+    </div>
+    
+        
+        <div class="container" style="margin-top: 23px;">
+            <form  method="get">
+                <label for="name" style=" font-weight: bold;">药物名：</label>
+                <input type="text" id="name" name="name" value="{{ name_query }}" style="margin-right: 10px;">
+                
+                <label for="type" style=" font-weight: bold;">类型：</label>
+                <select id="type" name="type">
+                    <option value="" {% if not type_query %}selected{% endif %} style="color: #999;">选择类型</option>
+                    {% for type in types %}
+                        <option value="{{ type.0 }}" {% if type.0 == type_query %}selected{% endif %}>
+                            {{ type.1 }}
+                        </option>
+                    {% endfor %}
+                </select>        
+                
+                <button type="submit" class="btn btn-primary">搜索</button>
+              </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" >药物名</th>
+                    <th scope="col" >类型</th>
+                    <th scope="col" >价格</th>      
+                </tr>
+                </thead>
+                <tbody>
+                    {% for medicine in medicines %}
+                    <tr>
+                        <td>{{ medicine.name }}</td>
+                        <td>{{ medicine.get_type_display }}</td>
+                        <td>{{ medicine.price }}￥</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+            
+            <div class="pagination">
+                <span class="step-links">
+                    {% if medicines.has_previous %}
+                        <a href="?page=1">&laquo; 首页</a>
+                        <a href="?page={{ medicines.previous_page_number }}">上一页</a>
+                    {% else %}
+                    <a>&laquo; 首页</a>
+                    <a>上一页</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        第 {{ medicines.number }} / {{ medicines.paginator.num_pages }} 页
+                    </span>
+            
+                    {% if medicines.has_next %}
+                        <a href="?page={{ medicines.next_page_number }}">下一页</a>
+                        <a href="?page={{ medicines.paginator.num_pages }}">尾页 &raquo;</a>
+                    {% else %}
+                    <a>下一页</a>
+                    <a>尾页 &raquo;</a>                    
+                    {% endif %}
+                </span>
+            </div>
+        </body>
+        
+    </div>
+    </div>  
+        
+</body>
+</html>

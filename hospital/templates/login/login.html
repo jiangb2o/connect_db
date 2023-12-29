@@ -9,6 +9,17 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css'%}"/>
   <link rel="stylesheet" href="{% static 'css/bootstrap/style.css'%}"/>
   <link rel="stylesheet" href="{% static 'css/login/login.css'%}"/>
+  <style>
+    .error {
+      color: #dc3545;
+      display: block;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      font-size: 16px; 
+      margin-left: 17px;  /* 可以调整靠左边的距离 */
+      text-align: left;  /* 左对齐 */
+    }
+  </style>
 </head>
 
 <body>
@@ -52,27 +63,27 @@
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="/static/img/slider-img.png" alt="">
+                    <img src="{% static 'img/slider-img.png'%}" alt="">
                   </div>
                 </div>
                 <div class="container">
                     <div class="row">
                       <div class="col-md-3">
                         <div class="contact_info">
-                          <h4>Email</h4>
+                          <h4>邮箱：</h4>
                           <p>info@example.com</p>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="contact_info">
-                          <h4>Phone</h4>
-                          <p>+123 456 7890</p>
+                          <h4>咨询电话：</h4>
+                          <p>020-12345678</p>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="contact_info">
-                          <h4>Address: </h4>
-                          <p>123 Street, City, Country</p>
+                          <h4>地址：</h4>
+                          <p>广州市番禺区大学城至善医院</p>
                         </div>
                       </div>
                     </div>

@@ -1,22 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>医生详情</title>
-  <!-- 引入Bootstrap样式 -->
-  <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}"/>
 
-  <link rel="stylesheet" href="/static/css/patient/registrations.css"/>
+
   <style>
     /* 自定义样式 */
     body {
       height: 100%;
       background-color: #a5bdd4; /* 设置白色背景 */
       overflow: hidden;
+      padding: 0px;
 }
 
   .container {
+    margin-top: 20px;
     background-color:#f8f9fa;
     width: 90%;
     height: 94vh;
@@ -48,18 +50,37 @@
 }
  h3 {
   text-align: left;
-  padding-top: 20px;
+  padding-top: 10px;
   color: #f8f9fa;
   padding-bottom: 10px;
   
  }
  label {
-  font-size: 20px;
+  font-size: 20px;/*字体大小*/
  }
  p {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 24px;
  }
+ a {
+    text-decoration: none;
+    color: #112434;
+  }
+
+  a:hover {
+    color: #fff;
+    background-color: #112434;
+  }
+
+ .return-link {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    margin-right: 40px;
+    margin-top: 20px;
+    text-decoration: underline;
+    font-size: 1.2em; /* 调整字体大小 */
+  }
   </style>
 </head>
 <body>
@@ -70,7 +91,7 @@
 </script>
 <a href="#" class="return-link" onclick="goBack()">返回上一页</a>
   <div class="container "> 
-      <div class="col-12 text-center" style="background-color: #112434;">
+      <div class="col-12 text-center" style="background-color: #112434; ">
           <h3>详情介绍</h3>
       </div>
     <div class="row">
@@ -82,13 +103,14 @@
     <div class="row mt-3" style="text-align: center; " >
       <div class="col-md-6">
         <div class="form-group">
-          <label for="title"> 职称: {{ doctor.title }} </label>
-          
+          <label for="title"> 职称: </label>
+          <p>{{ doctor.title }}</p>         
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="department">所属科室: {{ doctor.dept.name }}</label>
+          <label for="department">所属科室:</label>
+          <p>{{ doctor.dept.name }}</p>
         </div>
       </div>
     </div>
@@ -98,7 +120,7 @@
       <div class="col-12">
         <div class="form-group" style="text-align: center;">
           <label for="profile">简介:</label>
-          <p>{{ doctor.profile }}</p>
+          <p style="font-size: 24px;">{{ doctor.profile }}</p>
         </div>
       </div>
     </div>

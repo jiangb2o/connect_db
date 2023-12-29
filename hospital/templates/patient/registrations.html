@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>挂号记录</title>
-  <link rel="stylesheet" href="/static/css/patient/registrations.css"> 
+  
+  <link rel="stylesheet" href="{% static 'css/patient/registrations.css'%}"/>
+
 </head>
 
 <body>
@@ -32,7 +34,7 @@
       {% for registration in registrations %}
       <tr>
         <td>{{ registration.doctor.name }}</td>
-        <td>{{ registration.registration_time|date:"Y年 m月 d日" }}</td>
+        <td>{{ registration.registration_time|date:"Y年m月d日" }}</td>
         <td>{{ registration.get_period_display }}</td>
         <td>{{ registration.get_status_display }}</td>
         {% if registration.status == 0 %}

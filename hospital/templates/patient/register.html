@@ -2,37 +2,100 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>register</title>
-        <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
-        <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css'%}"/>
-        <link rel="stylesheet" href="{% static 'css/patient/register.css'%}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>患者界面 - 预约</title>
+    <link rel="stylesheet" href="{% static 'css/patient/register.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css'%}"/>
 
-        <link rel="stylesheet" href="/hospital/static/css/bootstrap/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/hospital/static/css/bootstrap/font-awesome.min.css"/>
-        <link rel="stylesheet" href="/hospital/static/css/patient/register.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #a5bdd4;
+            overflow: hidden;
+        }
 
-      
-    </head>
+        .department-name {
+            font-size: 1.2em;
+            background-color: #a5bdd4; /* 设置科室名字背景颜色 */
+            background: linear-gradient(to right, #a5bdd4 14%, transparent 14%);
+            color: #fff; /* 设置科室名字文字颜色 */
+            padding:3px; /* 设置内边距 */
+            margin: 0px; /* 去除默认外边距 */
+            white-space: nowrap; /* 防止科室名字换行 */
+            margin-top: 20px;
+        }
+
+        .menu-container {
+            flex-grow: 1; /* 让菜单栏和内容容器平分剩余空间 */
+            align-items: flex-start;
+        }
+        .sidenav {    
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            bottom:0;
+            background-color: #0c1e35;
+            padding-top: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            margin-top: 0px; /* 调整上边距，将菜单栏下移 */
+        }
+    
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+        .sidenav a.active {
+            color: #0c1e35;
+            background-color: #fff;
+        }
+        .sidenav a:hover {
+            color: #0c1e35;
+            background-color: #fff;
+        }
+        .container {
+            margin-left: 280px;
+            height: 93vh; /* 设置容器的初始高度为视口的高度 */
+            max-height: 93vh;
+            overflow-y: auto; /* 添加滚动条，只在内容溢出时显示 */
+            max-width: 140vh;
+            position: relative;
+            min-height: 90vh;
+            background-color: #fff; /* 白色容器背景 */
+            border-radius: 8px; /* 圆角边框 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            flex-grow: 1;
+            margin-right: 70px; 
+            margin-top: 23px;
+            }
+    </style>
+</head>
 
 <body>
-    <header>
-        <h5>患者界面</h5> 
-    </header>
     <!-- 菜单栏和页面内容容器 -->
     <div class="menu-container">
         <!-- 菜单栏 -->
-        <div class="sidenav">
-            <a href="/patient/home" >首页</a>
-            <a href="#" class="active">预约</a>
-            <a href="/patient/personnel">医生介绍</a>
+        <div class="sidenav" style="bottom:0;">
+            <h4 style="color: #fff; margin: 30px; margin-top: 10px;">患者界面</h4>
+            <a href="/patient/home">首页</a>
+            <a class="active">预约</a>
+            <a  href="/patient/personnel">医生介绍</a>
             <a href="/patient/registrations">挂号记录</a>
-            <a href="/patient/personal">个人界面</a>
+            <a href="/patient/personal">个人中心</a>
         </div>
         
-        <div class="container">
+        <div class="container" style="margin-top: 23px;">
             <form  method="get" action="/patient/register/">
                 <label for="name" style=" font-weight: bold;">医生姓名：</label>
                 <input type="text" id="name" name="name" value="{{ name_query }}" style="margin-right: 10px;">
@@ -45,17 +108,17 @@
                             {{ department.name }}
                         </option>
                     {% endfor %}
-                </select>
-                
+                </select>        
                 
                 <button type="submit" class="btn btn-primary">搜索</button>
-              </form>
+            </form>
+
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">医生姓名</th>
-                    <th scope="col">科室</th>
-                    <th scope="col">操作</th>      
+                    <th scope="col" >医生姓名</th>
+                    <th scope="col" >科室</th>
+                    <th scope="col" >操作</th>      
                 </tr>
                 </thead>
                 <script>
@@ -67,17 +130,17 @@
                     }
                     </script>
                 <tbody>
-                {% for doctor in doctors %}
-                <tr>
-                    <td>{{ doctor.name }}</td>
-                    <td>{{ doctor.dept.name }}</td>
-                    <td>
-                    <!-- 预约按钮，点击后调用 showAppointmentModal 函数 -->
-                    <button class="btn btn-primary" style="background-color: #a5bdd4;" onclick="redirectToAppointment('{{ doctor.id }}')">预约</button>
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.name }}</td>
+                        <td>{{ doctor.dept.name }}</td>
+                        <td>
+                        <!-- 预约按钮，点击后调用 showAppointmentModal 函数 -->
+                        <button class="btn btn-primary" style="background-color: #a5bdd4;" onclick="redirectToAppointment('{{ doctor.id }}')">预约</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
             </table>
             
             <div class="pagination">
